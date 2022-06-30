@@ -18,7 +18,7 @@ static uint8 StateFlag = 0; //状态标志位
 
 #define DOWN_PROTECTION 1  //过低保护
 #define RUNING 2		   //正常运行状态
-#define OVER_PPROTECTION 3 //超调保护
+#define OVER_PPROTECTION 3 //超调保护哈哈哈哈
 
 #define smooth_index 10				  //平滑因子，过度状态切换使用
 static uint8 state_chage_counter = 0; //状态变化计数器
