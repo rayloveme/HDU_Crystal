@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "headfile.h": "c",
+        "othercontrol.h": "c"
+    }
+}

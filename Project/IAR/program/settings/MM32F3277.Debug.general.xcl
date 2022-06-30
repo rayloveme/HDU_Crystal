@@ -1,0 +1,15 @@
+"E:\IAR\arm\bin\armproc.dll" 
+
+"E:\IAR\arm\bin\armJET.dll" 
+
+"F:\something\extra\competition\program\MM629\Project\IAR\program\Debug\Exe\MM32F3277.out" 
+
+--plugin="E:\IAR\arm\bin\armbat.dll" 
+
+--device_macro="E:\IAR\arm\config\debugger\MindMotion\MM32F3270.dmac" 
+
+--flash_loader="E:\IAR\arm\config\flashloader\MindMotion\FlashMM32F327xGx.board" 
+
+
+
+

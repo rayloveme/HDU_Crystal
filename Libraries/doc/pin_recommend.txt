@@ -1,0 +1,43 @@
+总钻风摄像头  UART8 TIM1
+	TXD			PE0 <单片机的 UART8 RX>
+	RXD			PE1 <单片机的 UART8 TX>
+	PLCK		PE7 <单片机的 TIM1_ETR 信号 对应 DMA1_CH4 的 TIM1_TRIG >
+	VSYNC		PE8
+	DATA		PF0-PF7
+
+电机    TIM5
+	TIM5_CH1	PA0
+	TIM5_CH2	PA1
+	TIM5_CH3	PA2
+	TIM5_CH4	PA3
+
+编码器   TIM3/4
+	TIM3_ENC1	PB4
+	TIM3_ENC2	PB5
+	TIM4_ENC1	PB6
+	TIM4_ENC2	PB7
+
+OLED	SCL/D0		        PC9
+	SDA/D1		        PC8
+	RST			PC7
+	DC			PC6
+
+陀螺仪     ICM20602 SPI2
+	SCL		PB13 <单片机的 SPI2 SCK>
+	SDA		PB15 <单片机的 SPI2 MOSI>
+	SAO		PB14 <单片机的 SPI2 MISO>
+	CS			PB12
+
+无线转串口模块 UART4
+	TX			PC10
+	RX			PC11
+	RTS			PC12
+
+调试串口(留排母出来)    UART1
+	TX			PA9
+	RX			PA10
+
+蜂鸣器：PB0
+按键
+        五向：PG8 PG7 PG6 PG5 PG4
+        普通：PG3 PG2
