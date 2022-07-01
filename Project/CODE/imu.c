@@ -34,7 +34,7 @@ void IMU_Get(void)
 
     get_icm20602_accdata_spi();
     get_icm20602_gyro_spi();
-    icm_gyro_y = icm_gyro_y + 2;
+    icm_gyro_y = icm_gyro_y + 6;
 }
 
 //float ang_acc = 0.0, ang_gyro = 0.0, ang = 0.0;
@@ -60,7 +60,7 @@ int16 angle = 0;       //滤波后角度
 int16 angle_final = 0; //换算后角度
 void Complementary_Filter(void)
 {
-    static float p1 = 0.0800000, p2 = 0.01700000;
+    static float p1 = 0.0800000, p2 = -0.01300000;
     angle = p1 * icm_acc_x + (1 - p1) * (angle + p2 * icm_gyro_y); //直立 ace x gyr y
     // angle -1000（抬头）到 -4000（低头）
     angle_final = angle + 4500;

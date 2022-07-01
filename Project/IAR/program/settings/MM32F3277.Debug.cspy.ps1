@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "E:\IAR\common\bin\cspybat" -f "F:\something\extra\competition\program\MM629\Project\IAR\program\settings\MM32F3277.Debug.general.xcl" --backend -f "F:\something\extra\competition\program\MM629\Project\IAR\program\settings\MM32F3277.Debug.driver.xcl" 
+& "E:\IAR\common\bin\cspybat" -f "F:\something\extra\competition\program\HDU_Crystal\Project\IAR\program\settings\MM32F3277.Debug.general.xcl" --backend -f "F:\something\extra\competition\program\HDU_Crystal\Project\IAR\program\settings\MM32F3277.Debug.driver.xcl" 
 }
 else
 {
-& "E:\IAR\common\bin\cspybat" -f "F:\something\extra\competition\program\MM629\Project\IAR\program\settings\MM32F3277.Debug.general.xcl" --debug_file=$debugfile --backend -f "F:\something\extra\competition\program\MM629\Project\IAR\program\settings\MM32F3277.Debug.driver.xcl" 
+& "E:\IAR\common\bin\cspybat" -f "F:\something\extra\competition\program\HDU_Crystal\Project\IAR\program\settings\MM32F3277.Debug.general.xcl" --debug_file=$debugfile --backend -f "F:\something\extra\competition\program\HDU_Crystal\Project\IAR\program\settings\MM32F3277.Debug.driver.xcl" 
 }

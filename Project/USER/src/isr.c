@@ -23,7 +23,7 @@ static uint8 StateFlag = 0; //状态标志位
 #define smooth_index 10				  //平滑因子，过度状态切换使用
 static uint8 state_chage_counter = 0; //状态变化计数器
 
-void state_judge()
+void state_judge(void)
 {	//状态判断函数
 	// uint8 state_flag_last = StateFlag;
 
@@ -39,6 +39,8 @@ void state_judge()
 	}
 }
 
+
+int16 lastrightpwm=0,lastleftpwm=0;
 void TIM8_UP_IRQHandler(void) //中断 1ms
 {
 	uint32 state = TIM8->SR; // 读取中断状态
@@ -52,17 +54,30 @@ void TIM8_UP_IRQHandler(void) //中断 1ms
 	}
 	else if (1)
 	{
+//            pidout=0;
 		IncPid_Cal(&gyro_pid, icm_gyro_y, pidout);
-		leftpwm = gyro_pid.value;
-		rightpwm = gyro_pid.value;
+
+                lastleftpwm=leftpwm;
+                lastrightpwm=rightpwm;
+
+		leftpwm = -gyro_pid.value;
+		rightpwm = -gyro_pid.value;
 	}
 
 	direction.value = Int_Range_Protect(direction.value, -2000, 2000);
 
+
+
+
 	leftpwm -= direction.value;
 	rightpwm += direction.value;
 
+        leftpwm=0.7*leftpwm+0.3*lastleftpwm;
+        rightpwm=0.7*rightpwm+0.3*lastrightpwm;
+
 	PWM_dynamic_limit();
+
+
 
 	Motor_Set(leftpwm, rightpwm);
 
@@ -94,21 +109,24 @@ void TIM6_IRQHandler(void) //中断  5ms
 		LocPid_Cal(&speed_cl, L_C + R_C, speed_set);
 	}
 
-	switch (StateFlag)
+//	switch (StateFlag)
+            	switch (StateFlag)
+
 	{
 	case DOWN_PROTECTION:
 		//          LocPid_Cal(&upright, angle_final, angle_set + speed_cl.value);
 		//		LocPid_Cal(&upr_help, angle_final, angle_set);
 
 		LocPid_Cal(&upright, angle_final, angle_set);
-		pidout = upright.value;
+		pidout = -upright.value;
 
 		break;
 	case RUNING:
 
 		//                LocPid_Cal(&speed_cl, L_C + R_C, speed_set);
-		LocPid_Cal(&upright, angle_final, 750 + speed_cl.value);
-		pidout = upright.value;
+//		speed_cl.value=0;
+            LocPid_Cal(&upright, angle_final, 1000 + speed_cl.value);
+		pidout = -upright.value;
 
 		break;
 	}
