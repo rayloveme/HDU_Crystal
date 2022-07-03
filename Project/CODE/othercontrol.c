@@ -136,6 +136,5 @@ void Cut_Set(uint8 DIR)
        direction.value=turn_speed;
 //           +k_z*icm_gyro_z;
     else
-       direction.value=-turn_speed;
-//           -k_z*icm_gyro_z;
+       direction.value=-turn_speed-k_z*icm_gyro_z;
 }

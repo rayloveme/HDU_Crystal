@@ -15,16 +15,20 @@ uint8 upr_flag = 1;
 int32 pidout = 0;
 
 static uint8 StateFlag = 0; //状态标志位
+static uint8 RunFlag = 0;
 
 #define DOWN_PROTECTION 1  //过低保护
 #define RUNING 2		   //正常运行状态
 #define OVER_PPROTECTION 3 //超调保护 嘿嘿
 
+#define CUT_STATE 1	   //切灯
+#define BEACON_STATE 2 //寻灯
+
 #define smooth_index 10				  //平滑因子，过度状态切换使用
 static uint8 state_chage_counter = 0; //状态变化计数器
 
 void state_judge(void)
-{	//状态判断函数
+{ //状态判断函数
 	// uint8 state_flag_last = StateFlag;
 
 	if (angle_final > 2500) //弹射起飞
@@ -39,8 +43,7 @@ void state_judge(void)
 	}
 }
 
-
-int16 lastrightpwm=0,lastleftpwm=0;
+int16 lastrightpwm = 0, lastleftpwm = 0;
 void TIM8_UP_IRQHandler(void) //中断 1ms
 {
 	uint32 state = TIM8->SR; // 读取中断状态
@@ -54,11 +57,11 @@ void TIM8_UP_IRQHandler(void) //中断 1ms
 	}
 	else if (1)
 	{
-//            pidout=0;
+		//            pidout=0;
 		IncPid_Cal(&gyro_pid, icm_gyro_y, pidout);
 
-                lastleftpwm=leftpwm;
-                lastrightpwm=rightpwm;
+		lastleftpwm = leftpwm;
+		lastrightpwm = rightpwm;
 
 		leftpwm = -gyro_pid.value;
 		rightpwm = -gyro_pid.value;
@@ -66,18 +69,22 @@ void TIM8_UP_IRQHandler(void) //中断 1ms
 
 	direction.value = Int_Range_Protect(direction.value, -2000, 2000);
 
+	if (cut_flag)
+	{
+//		speed_set = 1000;
+		leftpwm -=  direction.value;
 
-
-
-	leftpwm -= direction.value;
-	rightpwm += direction.value;
-
-        leftpwm=0.7*leftpwm+0.3*lastleftpwm;
-        rightpwm=0.7*rightpwm+0.3*lastrightpwm;
+		rightpwm += direction.value;
+	}
+	else
+	{
+		leftpwm -= direction.value;
+		rightpwm += direction.value;
+	}
+	leftpwm = 0.7 * leftpwm + 0.3 * lastleftpwm;
+	rightpwm = 0.7 * rightpwm + 0.3 * lastrightpwm;
 
 	PWM_dynamic_limit();
-
-
 
 	Motor_Set(leftpwm, rightpwm);
 
@@ -109,8 +116,8 @@ void TIM6_IRQHandler(void) //中断  5ms
 		LocPid_Cal(&speed_cl, L_C + R_C, speed_set);
 	}
 
-//	switch (StateFlag)
-            	switch (StateFlag)
+	//	switch (StateFlag)
+	switch (StateFlag)
 
 	{
 	case DOWN_PROTECTION:
@@ -124,8 +131,8 @@ void TIM6_IRQHandler(void) //中断  5ms
 	case RUNING:
 
 		//                LocPid_Cal(&speed_cl, L_C + R_C, speed_set);
-//		speed_cl.value=0;
-            LocPid_Cal(&upright, angle_final, 1000 + speed_cl.value);
+		//		speed_cl.value=0;
+		LocPid_Cal(&upright, angle_final, 1000 + speed_cl.value);
 		pidout = -upright.value;
 
 		break;

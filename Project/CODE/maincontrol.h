@@ -15,9 +15,9 @@
 
 
 
-#define std_ANGLE -1300
-#define high_ANGLE -1300
-#define low_ANGLE -1300
+#define std_ANGLE 1500
+#define high_ANGLE 1000
+#define low_ANGLE 2000
 
 
 
@@ -31,7 +31,7 @@ extern uint16 angle_set;
 extern int16 speed_set;
 
 extern uint32 angle_test,speed_test;
-extern uint8 pid_flag;
+extern uint8 pid_flag,cut_flag;
 
 
 void All_Init(void);

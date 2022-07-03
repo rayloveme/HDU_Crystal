@@ -34,10 +34,14 @@ void Wireless_Send_Pra(void)
 {
     uint8 data_buff[30]={0};
     uint8 buff0[4],buff1[4],buff2[2],buff3[2],buff4[2],buff5[2],buff6[2];
-    int16 spe=L_C+R_C;
+    uint16 flag=Down_Point_flag;
+    int16 spe_set=speed_set;
+
+
+    //int16 spe=L_C+R_C;
     //这一段根据自己需求来即可
     /*常用值 icm_gyro_x,icm_gyro_y,icm_gyro_z,
-    icm_acc_x,icm_acc_y,icm_acc_z,
+    icm_acc_x,icm_acc_y,icm_acc_z,angle_final
     L_C,R_C,beacon_x,beacon_y
     */
     /*
@@ -51,8 +55,8 @@ void Wireless_Send_Pra(void)
     memcpy(buff2, &angacc, 2);
 //    memcpy(buff3, &angyro, 2);
 //    memcpy(buff4, &spe,2);
-    memcpy(buff3, &icm_acc_x,2);
-    memcpy(buff4, &angle_final,2);
+    memcpy(buff3, &flag,2);
+    memcpy(buff4, &spe_set,2);
     memcpy(buff5, &icm_acc_z,2);
     memcpy(buff6, &icm_gyro_y,2);//往下降低 往上增加
 
