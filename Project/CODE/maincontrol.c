@@ -27,12 +27,14 @@ uint32 beacon_area = 0, beacon_area_last = 0;
 int16 area_change_rate = 0;
 uint32 turn_kp = 0, turn_speed = 0;
 
-uint16 angle_set = 750; //机械零点左右角度
+uint16 angle_set = 1000; //机械零点左右角度
 int16 speed_set = 0;
 uint32 angle_test = 90;
 uint32 speed_test = 0;
 int16 leftpwm = 0;
 int16 rightpwm = 0;
+
+uint8 cut_flag;
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      所有初始化
@@ -96,36 +98,36 @@ void Main_Control(void)
     {
         if (beacon_flag == 1)
         {
-            if ((area_change_rate < 5) || (beacon_y < down_point)) //没到减速点
+            cut_flag = 0;
+            if ((area_change_rate < 5) && (beacon_y < down_point)) //没到减速点
             {
                 LocPid_Cal(&direction, beacon_x, beacon_list[beacon_y]);
                 speed_set = speed_test;
             }
-//            else if (beacon_y < cut_point) //到达减速点
+            //            else if (beacon_y < cut_point) //到达减速点
 
-            else if (1) //到达减速点
+            else if ((beacon_y != 404)&&(beacon_y < cut_point)) //到达减速点
 
             {
                 if (Down_Point_flag == 0)
                 {
-                    speed_set = speed_test - 3000;
+                    speed_set = speed_test - 1000;
                     Down_Point_flag = 1;
                 }
                 LocPid_Cal(&direction, beacon_x, beacon_list[beacon_y]);
             }
             else //到达切灯点
             {
-                speed_set = speed_test - 3000;
-                direction.value = -1000;
+                speed_set = speed_test - 1000;
+                direction.value = 400;
                 //                speed_set=speed_test;
             }
         }
         else //丢灯
         {
+            cut_flag = 1;
             Down_Point_flag = 0;
-
-            Cut_Set(0);
-            speed_set = speed_test;
+            Cut_Set(1);
         }
     }
     else if (run_mode == 1)
@@ -144,50 +146,50 @@ void Main_Control(void)
 //-------------------------------------------------------------------------------------------------------------------
 void Beacon_List_Init(void)
 {
-    beacon_list[0] = 55;
-    beacon_list[1] = 55;
-    beacon_list[2] = 55;
-    beacon_list[3] = 55;
-    beacon_list[4] = 55;
-    beacon_list[5] = 55;
-    beacon_list[6] = 55;
-    beacon_list[7] = 55;
-    beacon_list[8] = 55;
-    beacon_list[9] = 55;
-    beacon_list[10] = 55;
-    beacon_list[11] = 55;
-    beacon_list[12] = 55;
-    beacon_list[13] = 55;
-    beacon_list[14] = 55;
-    beacon_list[15] = 55;
-    beacon_list[16] = 55;
-    beacon_list[17] = 55;
-    beacon_list[18] = 55;
-    beacon_list[19] = 55;
-    beacon_list[20] = 55;
-    beacon_list[21] = 55;
-    beacon_list[22] = 55;
-    beacon_list[23] = 55;
-    beacon_list[24] = 55;
-    beacon_list[25] = 55;
-    beacon_list[26] = 55;
-    beacon_list[27] = 55;
-    beacon_list[28] = 55;
-    beacon_list[29] = 55;
-    beacon_list[30] = 55;
-    beacon_list[31] = 60;
-    beacon_list[32] = 61;
-    beacon_list[33] = 61;
-    beacon_list[34] = 61;
-    beacon_list[35] = 62;
-    beacon_list[36] = 62;
-    beacon_list[37] = 63;
-    beacon_list[38] = 63;
-    beacon_list[39] = 64;
-    beacon_list[40] = 64;
-    beacon_list[41] = 64;
-    beacon_list[42] = 65;
-    beacon_list[43] = 65;
+    beacon_list[0] =  75;
+    beacon_list[1] =  75;
+    beacon_list[2] =  75;
+    beacon_list[3] =  75;
+    beacon_list[4] =  75;
+    beacon_list[5] =  75;
+    beacon_list[6] =  75;
+    beacon_list[7] =  75;
+    beacon_list[8] =  75;
+    beacon_list[9] =  75;
+    beacon_list[10] = 75;
+    beacon_list[11] = 75;
+    beacon_list[12] = 75;
+    beacon_list[13] = 75;
+    beacon_list[14] = 75;
+    beacon_list[15] = 75;
+    beacon_list[16] = 75;
+    beacon_list[17] = 75;
+    beacon_list[18] = 75;
+    beacon_list[19] = 75;
+    beacon_list[20] = 75;
+    beacon_list[21] = 75;
+    beacon_list[22] = 75;
+    beacon_list[23] = 75;
+    beacon_list[24] = 75;
+    beacon_list[25] = 75;
+    beacon_list[26] = 75;
+    beacon_list[27] = 75;
+    beacon_list[28] = 75;
+    beacon_list[29] = 75;
+    beacon_list[30] = 75;
+    beacon_list[31] = 75;
+    beacon_list[32] = 75;
+    beacon_list[33] = 75;
+    beacon_list[34] = 75;
+    beacon_list[35] = 75;
+    beacon_list[36] = 75;
+    beacon_list[37] = 75;
+    beacon_list[38] = 75;
+    beacon_list[39] = 75;
+    beacon_list[40] = 75;
+    beacon_list[41] = 75;
+    beacon_list[42] = 75;
+    beacon_list[43] = 75;
     beacon_list[44] = 75;
     beacon_list[45] = 75;
     beacon_list[46] = 75;
