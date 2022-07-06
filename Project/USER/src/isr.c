@@ -71,8 +71,8 @@ void TIM8_UP_IRQHandler(void) //中断 1ms
 
 	if (cut_flag)
 	{
-//		speed_set = 1000;
-		leftpwm -=  direction.value;
+		//		speed_set = 1000;
+		leftpwm -= direction.value;
 
 		rightpwm += direction.value;
 	}
@@ -486,7 +486,7 @@ void DMA2_Channel5_IRQHandler(void)
 		DMA_ClearFlag(DMA2_FLAG_TC5); // 清空该通道中断标志
 	}
 }
-
+/*
 #ifdef Will_never_be_defined
 WWDG_IRQHandler
 	PVD_IRQHandler
@@ -551,3 +551,4 @@ WWDG_IRQHandler
 																																																												UART7_IRQHandler
 																																																													UART8_IRQHandler
 #endif
+*/

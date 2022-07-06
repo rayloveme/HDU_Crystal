@@ -24,7 +24,6 @@ uint8 beacon_list[405] = {0};
 uint32 beacon_x = 0, beacon_y = 0;
 uint32 last_beacon_x = 0, last_beacon_y = 0;
 uint32 beacon_area = 0, beacon_area_last = 0;
-int16 area_change_rate = 0;
 uint32 turn_kp = 0, turn_speed = 0;
 
 uint16 angle_set = 1000; //机械零点左右角度
@@ -99,14 +98,14 @@ void Main_Control(void)
         if (beacon_flag == 1)
         {
             cut_flag = 0;
-            if ((area_change_rate < 5) && (beacon_y < down_point)) //没到减速点
+            if (beacon_y < down_point) //没到减速点
             {
                 LocPid_Cal(&direction, beacon_x, beacon_list[beacon_y]);
                 speed_set = speed_test;
             }
             //            else if (beacon_y < cut_point) //到达减速点
 
-            else if ((beacon_y != 404)&&(beacon_y < cut_point)) //到达减速点
+            else if ((beacon_y != 404) && (beacon_y < cut_point)) //到达减速点
 
             {
                 if (Down_Point_flag == 0)
@@ -146,16 +145,16 @@ void Main_Control(void)
 //-------------------------------------------------------------------------------------------------------------------
 void Beacon_List_Init(void)
 {
-    beacon_list[0] =  75;
-    beacon_list[1] =  75;
-    beacon_list[2] =  75;
-    beacon_list[3] =  75;
-    beacon_list[4] =  75;
-    beacon_list[5] =  75;
-    beacon_list[6] =  75;
-    beacon_list[7] =  75;
-    beacon_list[8] =  75;
-    beacon_list[9] =  75;
+    beacon_list[0] = 75;
+    beacon_list[1] = 75;
+    beacon_list[2] = 75;
+    beacon_list[3] = 75;
+    beacon_list[4] = 75;
+    beacon_list[5] = 75;
+    beacon_list[6] = 75;
+    beacon_list[7] = 75;
+    beacon_list[8] = 75;
+    beacon_list[9] = 75;
     beacon_list[10] = 75;
     beacon_list[11] = 75;
     beacon_list[12] = 75;

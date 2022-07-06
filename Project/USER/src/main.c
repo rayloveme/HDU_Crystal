@@ -16,7 +16,7 @@ int main(void)
     while (1)
     {
         Main_Control();
-        if (menu_flag == 1)
+        if (menu_flag)
         {
             Key_Operation();
             Show_Control();

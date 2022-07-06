@@ -31,64 +31,98 @@ void Image_Binarization(uint8 image[ROW][COL], uint8 image_binr[ROW][COL], uint8
         }
 }
 
+struct Domain domain[DOMAIN_NUMBER];
 //-------------------------------------------------------------------------------------------------------------------
-//  @brief      生瀚gg的信标查找法
+//  @brief      搜索连通域
 //  @param      image[ROW][COL]         二值化后的图像数组
 //  @param      height                  高度
 //  @param      width                   宽度
 //  @return     找到1 没找到0
 //  Sample usage:       Beacon_Find_Bin(image_binr,64,128);
 //-------------------------------------------------------------------------------------------------------------------
-uint8 Beacon_Find_Bin(uint8 image[ROW][COL], uint8 height, uint8 width)
+uint8 Domain_Find_Bin(uint8 image[ROW][COL], uint8 height, uint8 width)
 {
-    uint8 i = 0;
-    uint8 j = 0;
+
+    int16 i = 0;
+    int16 j = 0;
     uint8 area = 0;
+    uint8 domain_count = 0;
     uint8 left, up, right, down;
     uint8 find_flag = 0;
     uint8 line_area = 0;      //记录当前行面积
     uint8 last_line_area = 0; //记录上一行面积
-    for (i = height - 1; i > 0; i--)
+
+    for (i = height - 1; i >= 0; i--)
     {
         line_area = 0;
         for (j = 0; j < width; j++)
         {
-            if (image[i][j] == 1 && find_flag == 0)
-            {
-                left = j;
-                down = i;
-                find_flag = 1;
-            }
             if (image[i][j] == 1)
             {
-                area++;
+                if (find_flag == 0)
+                {
+                    find_flag = 1;
+                }
+                left = j;
+                down = i;
                 up = i;
                 right = j;
                 line_area++;
+                area++;
             }
         }
-        if (last_line_area > 0 && line_area == 0)
-            break;
+
+        if ((last_line_area > 0 && line_area == 0) || (i == 0 && line_area != 0))
+        {
+            if (domain_count < DOMAIN_NUMBER)
+            {
+                beacon_flag = 1;
+
+                domain[domain_count].last_area = domain[domain_count].area;
+                domain[domain_count].area = area;
+                domain[domain_count].area_change_rate = domain[domain_count].area - domain[domain_count].last_area;
+                domain[domain_count].x = (left + right) >> 1;
+                domain[domain_count].y = (up + down) >> 1;
+
+                domain_count++;
+                left = 0;
+                right = 0;
+                up = 0;
+                down = 0;
+                area = 0;
+            }
+            else
+            {
+                //目前默认第一个连通域是灯
+                beacon_x = domain[0].x;
+                beacon_y = domain[0].y;
+                beacon_area = domain[0].area;
+                return 1;
+            }
+        }
         last_line_area = line_area;
-    }
-    if (area > 0)
-    {
-        beacon_area_last=beacon_area;
-        beacon_area = area;
-        area_change_rate=beacon_area-beacon_area_last;
-        beacon_x = (left + right) >> 1;
-        beacon_y = (up + down) >> 1;
-        beacon_flag = 1;
-        return 1;
     }
     if (find_flag == 0)
     {
-        //未找到灯标，则清空等表面积和数据
+        //未找到连通域，则清空数据
         beacon_x = 404;
         beacon_y = 404;
         beacon_area = 0;
+        return 0;
     }
-    return 0;
+    beacon_x = domain[0].x;
+    beacon_y = domain[0].y;
+    beacon_area = domain[0].area;
+    if (domain_count < DOMAIN_NUMBER)
+    {
+        for (uint8 n = 0; n < DOMAIN_NUMBER - domain_count; n++)
+        {
+            domain[domain_count + n].area = 0;
+            domain[domain_count + n].x = 404;
+            domain[domain_count + n].y = 404;
+        }
+    }
+    return 1;
 }
 
 //-------------------------------------------------------------------------------------------------------------------

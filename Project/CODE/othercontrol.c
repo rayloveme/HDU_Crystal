@@ -104,7 +104,7 @@ int16 Turn_Error_Filter(int16 error) //转向控制滑动输出滤波
 //-------------------------------------------------------------------------------------------------------------------
 void If_Find_Beacon(void)
 {
-    if (Beacon_Find_Bin(image_binr,64,128) == 0)
+    if (Domain_Find_Bin(image_binr,64,128) == 0)
     {
         beacon_check_frame++;
         if (beacon_check_frame > frame)
