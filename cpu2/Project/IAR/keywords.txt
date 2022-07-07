@@ -1,0 +1,16 @@
+int8u
+int8s
+int16u
+int16s
+int32s
+int32u
+fp32
+fp64
+uint8
+uint16
+uint32
+uint64
+int8
+int16
+int32
+int64

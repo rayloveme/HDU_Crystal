@@ -1,0 +1,799 @@
+###############################################################################
+#
+# IAR ELF Linker V8.32.3.193/W32 for ARM                  07/Jul/2022  16:53:57
+# Copyright 2007-2019 IAR Systems AB.
+#
+#    Output file  =  
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Exe\MM32F3277.out
+#    Map file     =  
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\List\MM32F3277.map
+#    Command line =  
+#        -f C:\Users\25471\AppData\Local\Temp\EWBA09.tmp
+#        (F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\board.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\common.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\encoder.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\flash.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_adc.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_bkp.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_can.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_comp.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_crc.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_crs.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_dac.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_dbg.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_dma.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_eth.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_exti.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_flash.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_fsmc.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_gpio.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_i2c.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_iwdg.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_misc.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_pwr.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_rcc.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_rtc.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_sdio.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_spi.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_tim.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_uart.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_uid.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_ver.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\hal_wwdg.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\image.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\imu.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\imufilter_useless.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\isr.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\main.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\maincontrol.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\menu.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\motor.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\mymath.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\othercontrol.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\pid.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_18TFT.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_7725.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_ABSOLUTE_ENCODER.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_ASSERT.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_FONT.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_ICM20602.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_IIC.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_IPS114_SPI.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_IPS200_PARALLEL8.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_L3G4200D.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_MMA8451.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_MPU6050.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_MT9V03X.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_OLED.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_PRINTF.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_TSL1401.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_UART_7725.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_VIRSCO.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\SEEKFREE_WIRELESS.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\startup_mm32f327x_iar.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\swj.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\system_mm32f327x.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\wireless.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_adc.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_camera.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_exti.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_flash.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_fsmc.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_gpio.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_pit.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_pwm.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_spi.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_systick.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_tim.o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj\zf_uart.o
+#        --no_out_extension -o
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Exe\MM32F3277.out
+#        --map
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\List\MM32F3277.map
+#        --config
+#        F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\MM32F3270.icf
+#        --semihosting --entry __iar_program_start --vfe --text_out locale)
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+__dlib_version  = 6
+
+
+*******************************************************************************
+*** HEAP SELECTION
+***
+
+The basic heap was selected because no calls to memory allocation
+functions were found in the application outside of system library
+functions, and there are calls to deallocation functions in the
+application.
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A0":  place at 0x800'0000 { ro section .intvec };
+"P1":  place in [from 0x800'0000 to 0x807'ffff] { ro };
+define block CSTACK with size = 8K, alignment = 8 { };
+define block HEAP with size = 2K, alignment = 8 { };
+"P2":  place in [from 0x2000'0000 to 0x2001'ffff] {
+          rw, block CSTACK, block HEAP };
+initialize by copy { rw };
+
+  Section            Kind         Address    Size  Object
+  -------            ----         -------    ----  ------
+"A0":                                       0x190
+  .intvec            ro code   0x800'0000   0x190  startup_mm32f327x_iar.o [1]
+                             - 0x800'0190   0x190
+
+"P1":                                      0x55c4
+  .text              ro code   0x800'0190   0x710  isr.o [1]
+  .text              ro code   0x800'08a0    0x94  imu.o [1]
+  .text              ro code   0x800'0934   0x178  pid.o [1]
+  .text              ro code   0x800'0aac   0x128  othercontrol.o [1]
+  .text              ro code   0x800'0bd4    0x22  S32ToDbl.o [3]
+  .text              ro code   0x800'0bf6    0x3a  zero_init3.o [4]
+  .text              ro code   0x800'0c30   0x1a2  DblMul.o [3]
+  .text              ro code   0x800'0dd2     0x2  startup_mm32f327x_iar.o [1]
+  .text              ro code   0x800'0dd4   0x17a  DblAdd.o [3]
+  .text              ro code   0x800'0f50    0x3a  DblToS32.o [3]
+  .text              ro code   0x800'0f8c   0x1f4  motor.o [1]
+  .text              ro code   0x800'1180    0x54  encoder.o [1]
+  .text              ro code   0x800'11d4   0x1f0  wireless.o [1]
+  .text              ro code   0x800'13c4    0x7c  SEEKFREE_UART_7725.o [1]
+  .text              ro code   0x800'1440   0x240  SEEKFREE_MT9V03X.o [1]
+  .text              ro code   0x800'1680   0x138  hal_exti.o [1]
+  .text              ro code   0x800'17b8    0x34  SEEKFREE_7725.o [1]
+  .text              ro code   0x800'17ec   0x128  hal_dma.o [1]
+  .text              ro code   0x800'1914    0xcc  SEEKFREE_ICM20602.o [1]
+  .text              ro code   0x800'19e0    0x24  S32ToFlt.o [3]
+  .text              ro code   0x800'1a04    0xd8  FltMul.o [3]
+  .text              ro code   0x800'1adc    0x80  FltSub.o [3]
+  .text              ro code   0x800'1b5c    0xe2  FltAdd.o [3]
+  .text              ro code   0x800'1c40    0x2a  FltToS32.o [3]
+  .text              ro code   0x800'1c6c    0x1a  U32ToDbl.o [3]
+  .text              ro code   0x800'1c88   0x246  DblDiv.o [3]
+  .text              ro code   0x800'1ed0   0x270  image.o [1]
+  .text              ro code   0x800'2140    0x1c  U32ToFlt.o [3]
+  .text              ro code   0x800'215c    0xd2  DblSub.o [3]
+  .text              ro code   0x800'2230   0x424  zf_pwm.o [1]
+  .text              ro code   0x800'2654   0x170  zf_tim.o [1]
+  .text              ro code   0x800'27c4   0x244  zf_uart.o [1]
+  .text              ro code   0x800'2a08     0x6  ABImemclr4.o [4]
+  .text              ro code   0x800'2a10    0xa6  ABImemcpy.o [4]
+  .text              ro code   0x800'2ab8    0x50  zf_systick.o [1]
+  .text              ro code   0x800'2b08   0x280  zf_gpio.o [1]
+  .text              ro code   0x800'2d88   0x100  zf_exti.o [1]
+  .text              ro code   0x800'2e88    0x34  common.o [1]
+  .text              ro code   0x800'2ebc   0x21c  zf_camera.o [1]
+  .text              ro code   0x800'30d8    0x6c  hal_rcc.o [1]
+  .text              ro code   0x800'3144    0x54  zf_spi.o [1]
+  .text              ro code   0x800'3198    0xfc  FltDiv.o [3]
+  .text              ro code   0x800'3294    0x32  ABImemset48.o [4]
+  .text              ro code   0x800'32c8    0x70  hal_misc.o [1]
+  .text              ro code   0x800'3338   0x138  hal_tim.o [1]
+  .text              ro code   0x800'3470   0x66c  SEEKFREE_OLED.o [1]
+  .text              ro code   0x800'3adc   0x65c  menu.o [1]
+  .text              ro code   0x800'4138   0x168  flash.o [1]
+  .text              ro code   0x800'42a0   0x140  zf_flash.o [1]
+  .text              ro code   0x800'43e0   0x100  hal_flash.o [1]
+  .rodata            const     0x800'44e0   0x5f0  SEEKFREE_FONT.o [1]
+  .text              ro code   0x800'4ad0   0x370  maincontrol.o [1]
+  .text              ro code   0x800'4e40    0x48  board.o [1]
+  .text              ro code   0x800'4e88    0xec  zf_pit.o [1]
+  .text              ro code   0x800'4f74   0x2b0  system_mm32f327x.o [1]
+  .rodata            const     0x800'5224   0x228  SEEKFREE_FONT.o [1]
+  Initializer bytes  const     0x800'544c    0xe8  <for P2-1>
+  .text              ro code   0x800'5534    0x2c  copy_init3.o [4]
+  .text              ro code   0x800'5560    0x28  data_init.o [4]
+  .text              ro code   0x800'5588    0x24  main.o [1]
+  .iar.init_table    const     0x800'55ac    0x24  - Linker created -
+  .text              ro code   0x800'55d0    0x1e  cmain.o [4]
+  .text              ro code   0x800'55ee     0x4  low_level_init.o [2]
+  .text              ro code   0x800'55f2     0x4  exit.o [2]
+  .text              ro code   0x800'55f8     0xa  cexit.o [4]
+  .text              ro code   0x800'5604    0x14  exit.o [5]
+  .rodata            const     0x800'5618    0x10  maincontrol.o [1]
+  .rodata            const     0x800'5628    0x10  maincontrol.o [1]
+  .text              ro code   0x800'5638    0x10  startup_mm32f327x_iar.o [1]
+  .rodata            const     0x800'5648     0xc  maincontrol.o [1]
+  .rodata            const     0x800'5654     0xc  menu.o [1]
+  .rodata            const     0x800'5660     0xc  menu.o [1]
+  .rodata            const     0x800'566c     0xc  menu.o [1]
+  .rodata            const     0x800'5678     0xc  menu.o [1]
+  .rodata            const     0x800'5684     0xc  menu.o [1]
+  .rodata            const     0x800'5690     0xc  menu.o [1]
+  .rodata            const     0x800'569c     0xc  menu.o [1]
+  .text              ro code   0x800'56a8     0xc  cstartup_M.o [4]
+  .rodata            const     0x800'56b4     0x8  menu.o [1]
+  .rodata            const     0x800'56bc     0x8  menu.o [1]
+  .rodata            const     0x800'56c4     0x8  menu.o [1]
+  .rodata            const     0x800'56cc     0x8  menu.o [1]
+  .rodata            const     0x800'56d4     0x8  menu.o [1]
+  .rodata            const     0x800'56dc     0x8  menu.o [1]
+  .rodata            const     0x800'56e4     0x8  menu.o [1]
+  .rodata            const     0x800'56ec     0x8  menu.o [1]
+  .rodata            const     0x800'56f4     0x8  menu.o [1]
+  .rodata            const     0x800'56fc     0x8  menu.o [1]
+  .rodata            const     0x800'5704     0x8  menu.o [1]
+  .rodata            const     0x800'570c     0x8  menu.o [1]
+  .rodata            const     0x800'5714     0x8  menu.o [1]
+  .rodata            const     0x800'571c     0x8  menu.o [1]
+  .rodata            const     0x800'5724     0x8  menu.o [1]
+  .rodata            const     0x800'572c     0x8  menu.o [1]
+  .rodata            const     0x800'5734     0x8  menu.o [1]
+  .rodata            const     0x800'573c     0x8  menu.o [1]
+  .rodata            const     0x800'5744     0x8  menu.o [1]
+  .rodata            const     0x800'574c     0x8  zf_pit.o [1]
+  .rodata            const     0x800'5754     0x0  zero_init3.o [4]
+  .rodata            const     0x800'5754     0x0  copy_init3.o [4]
+                             - 0x800'5754  0x55c4
+
+"P2", part 1 of 3:                           0xe8
+  P2-1                        0x2000'0000    0xe6  <Init block>
+    .data            inited   0x2000'0000     0x4  flash.o [1]
+    .data            inited   0x2000'0004     0x4  imu.o [1]
+    .data            inited   0x2000'0008     0x4  imu.o [1]
+    .data            inited   0x2000'000c     0x4  maincontrol.o [1]
+    .data            inited   0x2000'0010     0x4  maincontrol.o [1]
+    .data            inited   0x2000'0014     0x4  maincontrol.o [1]
+    .data            inited   0x2000'0018     0x4  menu.o [1]
+    .data            inited   0x2000'001c     0x4  menu.o [1]
+    .data            inited   0x2000'0020     0x4  othercontrol.o [1]
+    .data            inited   0x2000'0024    0x24  SEEKFREE_MT9V03X.o [1]
+    .data            inited   0x2000'0048    0x20  SEEKFREE_MT9V03X.o [1]
+    .data            inited   0x2000'0068     0x4  system_mm32f327x.o [1]
+    .data            inited   0x2000'006c    0x20  zf_gpio.o [1]
+    .data            inited   0x2000'008c     0xc  zf_spi.o [1]
+    .data            inited   0x2000'0098    0x20  zf_tim.o [1]
+    .data            inited   0x2000'00b8    0x20  zf_uart.o [1]
+    .data            inited   0x2000'00d8     0x8  zf_uart.o [1]
+    .data            inited   0x2000'00e0     0x2  maincontrol.o [1]
+    .data            inited   0x2000'00e2     0x1  maincontrol.o [1]
+    .data            inited   0x2000'00e3     0x1  othercontrol.o [1]
+    .data            inited   0x2000'00e4     0x1  zf_flash.o [1]
+    .data            inited   0x2000'00e5     0x1  zf_flash.o [1]
+                            - 0x2000'00e6    0xe6
+
+"P2", part 2 of 3:                         0x484c
+  .bss               zero     0x2000'00e8  0x2000  image.o [1]
+  .bss               zero     0x2000'20e8  0x2000  SEEKFREE_MT9V03X.o [1]
+  .bss               zero     0x2000'40e8   0x400  flash.o [1]
+  .bss               zero     0x2000'44e8   0x198  maincontrol.o [1]
+  .bss               zero     0x2000'4680   0x170  menu.o [1]
+  .bss               zero     0x2000'47f0    0x20  image.o [1]
+  .bss               zero     0x2000'4810    0x20  pid.o [1]
+  .bss               zero     0x2000'4830    0x20  pid.o [1]
+  .bss               zero     0x2000'4850    0x20  pid.o [1]
+  .bss               zero     0x2000'4870    0x20  pid.o [1]
+  .bss               zero     0x2000'4890    0x20  pid.o [1]
+  .bss               zero     0x2000'48b0    0x20  zf_pwm.o [1]
+  .bss               zero     0x2000'48d0     0x4  common.o [1]
+  .bss               zero     0x2000'48d4     0x4  isr.o [1]
+  .bss               zero     0x2000'48d8     0x4  maincontrol.o [1]
+  .bss               zero     0x2000'48dc     0x4  maincontrol.o [1]
+  .bss               zero     0x2000'48e0     0x4  maincontrol.o [1]
+  .bss               zero     0x2000'48e4     0x4  maincontrol.o [1]
+  .bss               zero     0x2000'48e8     0x4  maincontrol.o [1]
+  .bss               zero     0x2000'48ec     0x4  maincontrol.o [1]
+  .bss               zero     0x2000'48f0     0x4  maincontrol.o [1]
+  .bss               zero     0x2000'48f4     0x4  maincontrol.o [1]
+  .bss               zero     0x2000'48f8     0x4  pid.o [1]
+  .bss               zero     0x2000'48fc     0x4  SEEKFREE_MT9V03X.o [1]
+  .bss               zero     0x2000'4900     0x4  SEEKFREE_UART_7725.o [1]
+  .bss               zero     0x2000'4904     0x2  encoder.o [1]
+  .bss               zero     0x2000'4906     0x2  encoder.o [1]
+  .bss               zero     0x2000'4908     0x2  imu.o [1]
+  .bss               zero     0x2000'490a     0x2  imu.o [1]
+  .bss               zero     0x2000'490c     0x2  isr.o [1]
+  .bss               zero     0x2000'490e     0x2  isr.o [1]
+  .bss               zero     0x2000'4910     0x2  isr.o [1]
+  .bss               zero     0x2000'4912     0x2  maincontrol.o [1]
+  .bss               zero     0x2000'4914     0x2  maincontrol.o [1]
+  .bss               zero     0x2000'4916     0x2  maincontrol.o [1]
+  .bss               zero     0x2000'4918     0x2  SEEKFREE_ICM20602.o [1]
+  .bss               zero     0x2000'491a     0x2  SEEKFREE_ICM20602.o [1]
+  .bss               zero     0x2000'491c     0x2  SEEKFREE_ICM20602.o [1]
+  .bss               zero     0x2000'491e     0x2  SEEKFREE_ICM20602.o [1]
+  .bss               zero     0x2000'4920     0x2  SEEKFREE_ICM20602.o [1]
+  .bss               zero     0x2000'4922     0x2  SEEKFREE_ICM20602.o [1]
+  .bss               zero     0x2000'4924     0x1  common.o [1]
+  .bss               zero     0x2000'4925     0x1  isr.o [1]
+  .bss               zero     0x2000'4926     0x1  maincontrol.o [1]
+  .bss               zero     0x2000'4927     0x1  maincontrol.o [1]
+  .bss               zero     0x2000'4928     0x1  maincontrol.o [1]
+  .bss               zero     0x2000'4929     0x1  maincontrol.o [1]
+  .bss               zero     0x2000'492a     0x1  maincontrol.o [1]
+  .bss               zero     0x2000'492b     0x1  menu.o [1]
+  .bss               zero     0x2000'492c     0x1  menu.o [1]
+  .bss               zero     0x2000'492d     0x1  SEEKFREE_7725.o [1]
+  .bss               zero     0x2000'492e     0x1  SEEKFREE_MT9V03X.o [1]
+  .bss               zero     0x2000'492f     0x1  SEEKFREE_MT9V03X.o [1]
+  .bss               zero     0x2000'4930     0x1  SEEKFREE_MT9V03X.o [1]
+  .bss               zero     0x2000'4931     0x1  SEEKFREE_UART_7725.o [1]
+  .bss               zero     0x2000'4932     0x1  SEEKFREE_UART_7725.o [1]
+  .bss               zero     0x2000'4933     0x1  SEEKFREE_UART_7725.o [1]
+                            - 0x2000'4934  0x484c
+
+"P2", part 3 of 3:                         0x2000
+  CSTACK                      0x2000'4938  0x2000  <Block>
+    CSTACK           uninit   0x2000'4938  0x2000  <Block tail>
+                            - 0x2000'6938  0x2000
+
+Unused ranges:
+
+         From           To      Size
+         ----           --      ----
+   0x800'5754   0x807'ffff  0x7'a8ac
+  0x2000'4934  0x2000'4937       0x4
+  0x2000'6938  0x2001'ffff  0x1'96c8
+
+
+*******************************************************************************
+*** INIT TABLE
+***
+
+          Address      Size
+          -------      ----
+Zero (__iar_zero_init3)
+    1 destination range, total size 0x484c:
+          0x2000'00e8  0x484c
+
+Copy (__iar_copy_init3)
+    1 source range, total size 0xe8 (100% of destination):
+           0x800'544c    0xe8
+    1 destination range, total size 0xe6:
+          0x2000'0000    0xe6
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module                   ro code  ro data  rw data
+    ------                   -------  -------  -------
+command line/config:
+    --------------------------------------------------
+    Total:
+
+F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj: [1]
+    SEEKFREE_7725.o               52                 1
+    SEEKFREE_FONT.o                     2 072
+    SEEKFREE_ICM20602.o          204                12
+    SEEKFREE_MT9V03X.o           576       68    8 267
+    SEEKFREE_OLED.o            1 644
+    SEEKFREE_UART_7725.o         124                 7
+    board.o                       72
+    common.o                      52                 5
+    encoder.o                     84                 4
+    flash.o                      360        4    1 028
+    hal_dma.o                    296
+    hal_exti.o                   312
+    hal_flash.o                  256
+    hal_misc.o                   112
+    hal_rcc.o                    108
+    hal_tim.o                    312
+    image.o                      624             8 224
+    imu.o                        148        8       12
+    isr.o                      1 808                11
+    main.o                        36
+    maincontrol.o                880       59      466
+    menu.o                     1 628      244      378
+    motor.o                      500
+    othercontrol.o               296        5        5
+    pid.o                        376               164
+    startup_mm32f327x_iar.o      418
+    system_mm32f327x.o           688        4        4
+    wireless.o                   496
+    zf_camera.o                  540
+    zf_exti.o                    256
+    zf_flash.o                   320        2        2
+    zf_gpio.o                    640       32       32
+    zf_pit.o                     236        8
+    zf_pwm.o                   1 060                32
+    zf_spi.o                      84       12       12
+    zf_systick.o                  80
+    zf_tim.o                     368       32       32
+    zf_uart.o                    580       40       40
+    --------------------------------------------------
+    Total:                    16 626    2 590   18 738
+
+dl7M_tlf.a: [2]
+    exit.o                         4
+    low_level_init.o               4
+    --------------------------------------------------
+    Total:                         8
+
+m7M_tl.a: [3]
+    DblAdd.o                     378
+    DblDiv.o                     582
+    DblMul.o                     418
+    DblSub.o                     210
+    DblToS32.o                    58
+    FltAdd.o                     226
+    FltDiv.o                     252
+    FltMul.o                     216
+    FltSub.o                     128
+    FltToS32.o                    42
+    S32ToDbl.o                    34
+    S32ToFlt.o                    36
+    U32ToDbl.o                    26
+    U32ToFlt.o                    28
+    --------------------------------------------------
+    Total:                     2 634
+
+rt7M_tl.a: [4]
+    ABImemclr4.o                   6
+    ABImemcpy.o                  166
+    ABImemset48.o                 50
+    cexit.o                       10
+    cmain.o                       30
+    copy_init3.o                  44
+    cstartup_M.o                  12
+    data_init.o                   40
+    zero_init3.o                  58
+    --------------------------------------------------
+    Total:                       416
+
+shb_l.a: [5]
+    exit.o                        20
+    --------------------------------------------------
+    Total:                        20
+
+    Gaps                          24
+    Linker created                         38    8 192
+------------------------------------------------------
+    Grand Total:              19 728    2 628   26 930
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                       Address    Size  Type      Object
+-----                       -------    ----  ----      ------
+.iar.init_table$$Base    0x800'55ac           --   Gb  - Linker created -
+.iar.init_table$$Limit   0x800'55d0           --   Gb  - Linker created -
+?main                    0x800'55d1          Code  Gb  cmain.o [4]
+All_Init                 0x800'4ad1    0xa0  Code  Gb  maincontrol.o [1]
+AutoCalPllFactor         0x800'4fb9    0x54  Code  Gb  system_mm32f327x.o [1]
+Beacon_List_Init         0x800'4c2b   0x144  Code  Gb  maincontrol.o [1]
+BusFault_Handler         0x800'2eb3     0x2  Code  Gb  common.o [1]
+CSTACK$$Base            0x2000'4938           --   Gb  - Linker created -
+CSTACK$$Limit           0x2000'6938           --   Gb  - Linker created -
+Complementary_Filter     0x800'08b5    0x66  Code  Gb  imu.o [1]
+Complementary_Filter::p1
+                        0x2000'0004     0x4  Data  Lc  imu.o [1]
+Complementary_Filter::p2
+                        0x2000'0008     0x4  Data  Lc  imu.o [1]
+Cut_Set                  0x800'0b4f    0x42  Code  Gb  othercontrol.o [1]
+DELAY_xUs                0x800'500d    0x2e  Code  Lc  system_mm32f327x.o [1]
+DMA1_Channel1_IRQHandler
+                         0x800'069d    0x14  Code  Gb  isr.o [1]
+DMA1_Channel2_IRQHandler
+                         0x800'06b1    0x14  Code  Gb  isr.o [1]
+DMA1_Channel3_IRQHandler
+                         0x800'06c5    0x18  Code  Gb  isr.o [1]
+DMA1_Channel4_IRQHandler
+                         0x800'06dd    0x3e  Code  Gb  isr.o [1]
+DMA1_Channel5_IRQHandler
+                         0x800'071b    0x18  Code  Gb  isr.o [1]
+DMA1_Channel6_IRQHandler
+                         0x800'0733    0x18  Code  Gb  isr.o [1]
+DMA1_Channel7_IRQHandler
+                         0x800'074b    0x18  Code  Gb  isr.o [1]
+DMA2_Channel1_IRQHandler
+                         0x800'0763    0x16  Code  Gb  isr.o [1]
+DMA2_Channel2_IRQHandler
+                         0x800'0779    0x16  Code  Gb  isr.o [1]
+DMA2_Channel3_IRQHandler
+                         0x800'078f    0x16  Code  Gb  isr.o [1]
+DMA2_Channel4_IRQHandler
+                         0x800'07a5    0x16  Code  Gb  isr.o [1]
+DMA2_Channel5_IRQHandler
+                         0x800'07bb    0x16  Code  Gb  isr.o [1]
+DMA_ClearFlag            0x800'18eb    0x12  Code  Gb  hal_dma.o [1]
+DMA_Cmd                  0x800'1897     0xe  Code  Gb  hal_dma.o [1]
+DMA_DeInit               0x800'17ed    0x5a  Code  Gb  hal_dma.o [1]
+DMA_GetFlagStatus        0x800'18c1    0x2a  Code  Gb  hal_dma.o [1]
+DMA_ITConfig             0x800'18a5    0x1c  Code  Gb  hal_dma.o [1]
+DMA_Init                 0x800'1847    0x50  Code  Gb  hal_dma.o [1]
+DebugMon_Handler         0x800'2eb9     0x2  Code  Gb  common.o [1]
+Domain_Find_Bin          0x800'1f17   0x1ee  Code  Gb  image.o [1]
+Down_Point_flag         0x2000'4929     0x1  Data  Gb  maincontrol.o [1]
+EXTI0_IRQHandler         0x800'056d     0xa  Code  Gb  isr.o [1]
+EXTI15_10_IRQHandler     0x800'0621    0x7c  Code  Gb  isr.o [1]
+EXTI1_IRQHandler         0x800'0577     0xa  Code  Gb  isr.o [1]
+EXTI2_IRQHandler         0x800'0581     0xa  Code  Gb  isr.o [1]
+EXTI3_IRQHandler         0x800'058b     0xa  Code  Gb  isr.o [1]
+EXTI4_IRQHandler         0x800'0595     0xa  Code  Gb  isr.o [1]
+EXTI9_5_IRQHandler       0x800'059f    0x82  Code  Gb  isr.o [1]
+EXTI_ClearFlag           0x800'1781     0x6  Code  Gb  hal_exti.o [1]
+EXTI_GetITStatus         0x800'1787    0x1a  Code  Gb  hal_exti.o [1]
+EXTI_Init                0x800'16cb    0xa4  Code  Gb  hal_exti.o [1]
+EXTI_LineConfig          0x800'1681    0x4a  Code  Gb  hal_exti.o [1]
+EXTI_StructInit          0x800'176f    0x12  Code  Gb  hal_exti.o [1]
+Encoder_Init             0x800'1181    0x20  Code  Gb  encoder.o [1]
+FLASH_ClearFlag          0x800'445b     0x8  Code  Gb  hal_flash.o [1]
+FLASH_ErasePage          0x800'43f9    0x22  Code  Gb  hal_flash.o [1]
+FLASH_GetStatus          0x800'4463    0x2c  Code  Gb  hal_flash.o [1]
+FLASH_Lock               0x800'43e1     0xc  Code  Gb  hal_flash.o [1]
+FLASH_ProgramHalfWord    0x800'441b    0x16  Code  Gb  hal_flash.o [1]
+FLASH_ProgramWord        0x800'4431    0x2a  Code  Gb  hal_flash.o [1]
+FLASH_Unlock             0x800'43ed     0xc  Code  Gb  hal_flash.o [1]
+FLASH_WaitForLastOperation
+                         0x800'448f    0x38  Code  Gb  hal_flash.o [1]
+Flash_Read               0x800'41c5    0xa8  Code  Gb  flash.o [1]
+Flash_Write              0x800'4139    0x8c  Code  Gb  flash.o [1]
+GET_CFG                 0x2000'0048    0x20  Data  Gb  SEEKFREE_MT9V03X.o [1]
+Get_Encoder              0x800'11a1    0x2a  Code  Gb  encoder.o [1]
+HardFault_Handler        0x800'2eaf     0x2  Code  Gb  common.o [1]
+IMU_Get                  0x800'08a1    0x14  Code  Gb  imu.o [1]
+If_Find_Beacon           0x800'0afb    0x54  Code  Gb  othercontrol.o [1]
+Image_Binarization       0x800'1ed1    0x46  Code  Gb  image.o [1]
+Image_Get                0x800'2105    0x1a  Code  Gb  image.o [1]
+IncPid_Cal               0x800'0a05    0x9a  Code  Gb  pid.o [1]
+IncPid_Cal::pid_temp    0x2000'48f8     0x4  Data  Lc  pid.o [1]
+Int_Range_Protect        0x800'0aad    0x12  Code  Gb  othercontrol.o [1]
+Key_Init                 0x800'3add    0x58  Code  Gb  menu.o [1]
+Key_Operation            0x800'3b35   0x13e  Code  Gb  menu.o [1]
+L_C                     0x2000'4904     0x2  Data  Gb  encoder.o [1]
+L_Contorl                0x800'0fd3    0xca  Code  Gb  motor.o [1]
+LocPid_Cal               0x800'0959    0xac  Code  Gb  pid.o [1]
+MT9V03X_CFG             0x2000'0024    0x24  Data  Gb  SEEKFREE_MT9V03X.o [1]
+Main_Control             0x800'4b71    0xba  Code  Gb  maincontrol.o [1]
+MemManage_Handler        0x800'2eb1     0x2  Code  Gb  common.o [1]
+Menu_Init                0x800'3e5b   0x1fa  Code  Gb  menu.o [1]
+Menu_Item_Init           0x800'4129    0x10  Code  Gb  menu.o [1]
+Motor_Init               0x800'0f8d    0x46  Code  Gb  motor.o [1]
+Motor_Limit_Ratio       0x2000'00e3     0x1  Data  Gb  othercontrol.o [1]
+Motor_Set                0x800'1171    0x10  Code  Gb  motor.o [1]
+NMI_Handler              0x800'2ead     0x2  Code  Gb  common.o [1]
+NVIC_Init                0x800'32c9    0x5e  Code  Gb  hal_misc.o [1]
+PID_menu                0x2000'4680   0x170  Data  Gb  menu.o [1]
+PWM_dynamic_limit        0x800'0abf    0x3c  Code  Gb  othercontrol.o [1]
+Param_Cfg                0x800'4d6f    0x76  Code  Gb  maincontrol.o [1]
+PendSV_Handler           0x800'2ebb     0x2  Code  Gb  common.o [1]
+Pid_Init                 0x800'0935    0x24  Code  Gb  pid.o [1]
+RCC_AHBPeriphClockCmd    0x800'30d9    0x20  Code  Gb  hal_rcc.o [1]
+RCC_APB1PeriphClockCmd   0x800'3119    0x20  Code  Gb  hal_rcc.o [1]
+RCC_APB2PeriphClockCmd   0x800'30f9    0x20  Code  Gb  hal_rcc.o [1]
+R_C                     0x2000'4906     0x2  Data  Gb  encoder.o [1]
+R_Contorl                0x800'109d    0xca  Code  Gb  motor.o [1]
+Region$$Table$$Base      0x800'55ac           --   Gb  - Linker created -
+Region$$Table$$Limit     0x800'55d0           --   Gb  - Linker created -
+SVC_Handler              0x800'2eb7     0x2  Code  Gb  common.o [1]
+SetSysClock              0x800'503b    0x26  Code  Lc  system_mm32f327x.o [1]
+SetSysClockToXX          0x800'5061   0x170  Code  Lc  system_mm32f327x.o [1]
+Show_Control             0x800'3c73   0x1e8  Code  Gb  menu.o [1]
+StateFlag               0x2000'4925     0x1  Data  Lc  isr.o [1]
+SystemCoreClock         0x2000'0068     0x4  Data  Gb  system_mm32f327x.o [1]
+SystemInit               0x800'4f75    0x44  Code  Gb  system_mm32f327x.o [1]
+TIM1_UP_IRQHandler       0x800'03ad    0x10  Code  Gb  isr.o [1]
+TIM2_IRQHandler          0x800'03bd    0x10  Code  Gb  isr.o [1]
+TIM3_IRQHandler          0x800'03dd    0x10  Code  Gb  isr.o [1]
+TIM4_IRQHandler          0x800'03ed    0x10  Code  Gb  isr.o [1]
+TIM5_IRQHandler          0x800'03cd    0x10  Code  Gb  isr.o [1]
+TIM6_IRQHandler          0x800'02fd    0xb0  Code  Gb  isr.o [1]
+TIM6_IRQHandler::time20ms
+                        0x2000'4910     0x2  Data  Lc  isr.o [1]
+TIM7_IRQHandler          0x800'02ed    0x10  Code  Gb  isr.o [1]
+TIM8_UP_IRQHandler       0x800'01c5   0x128  Code  Gb  isr.o [1]
+TIM_Cmd                  0x800'33ad    0x1a  Code  Gb  hal_tim.o [1]
+TIM_DMACmd               0x800'33c7    0x1c  Code  Gb  hal_tim.o [1]
+TIM_ETRClockMode1Config
+                         0x800'3417    0x1a  Code  Gb  hal_tim.o [1]
+TIM_ETRConfig            0x800'33e3    0x34  Code  Gb  hal_tim.o [1]
+TIM_SelectInputTrigger   0x800'3431     0xe  Code  Gb  hal_tim.o [1]
+TIM_SelectMasterSlaveMode
+                         0x800'344d     0xe  Code  Gb  hal_tim.o [1]
+TIM_SelectSlaveMode      0x800'343f     0xe  Code  Gb  hal_tim.o [1]
+TIM_TimeBaseInit         0x800'3339    0x74  Code  Gb  hal_tim.o [1]
+UART1_IRQHandler         0x800'03fd    0x2a  Code  Gb  isr.o [1]
+UART2_IRQHandler         0x800'0427    0x2a  Code  Gb  isr.o [1]
+UART3_IRQHandler         0x800'0451    0x2a  Code  Gb  isr.o [1]
+UART4_IRQHandler         0x800'047b    0x2a  Code  Gb  isr.o [1]
+UART5_IRQHandler         0x800'04a5    0x2a  Code  Gb  isr.o [1]
+UART6_IRQHandler         0x800'04cf    0x2a  Code  Gb  isr.o [1]
+UART7_IRQHandler         0x800'04f9    0x2a  Code  Gb  isr.o [1]
+UART8_IRQHandler         0x800'0523    0x4a  Code  Gb  isr.o [1]
+UsageFault_Handler       0x800'2eb5     0x2  Code  Gb  common.o [1]
+Wireless_Init            0x800'11d5    0x16  Code  Gb  wireless.o [1]
+Wireless_Send_Pra        0x800'11eb   0x1be  Code  Gb  wireless.o [1]
+__NVIC_SetPriorityGrouping
+                         0x800'4e41    0x1a  Code  Lc  board.o [1]
+__Vectors                0x800'0000           --   Gb  startup_mm32f327x_iar.o [1]
+__Vectors_End            0x800'0190          Data  Gb  startup_mm32f327x_iar.o [1]
+__Vectors_Size {Abs}          0x190           --   Gb  startup_mm32f327x_iar.o [1]
+__aeabi_d2iz             0x800'0f51          Code  Gb  DblToS32.o [3]
+__aeabi_dadd             0x800'0dd5          Code  Gb  DblAdd.o [3]
+__aeabi_ddiv             0x800'1c89          Code  Gb  DblDiv.o [3]
+__aeabi_dmul             0x800'0c31          Code  Gb  DblMul.o [3]
+__aeabi_f2iz             0x800'1c41          Code  Gb  FltToS32.o [3]
+__aeabi_fadd             0x800'1b5d          Code  Gb  FltAdd.o [3]
+__aeabi_fdiv             0x800'3199          Code  Gb  FltDiv.o [3]
+__aeabi_fmul             0x800'1a05          Code  Gb  FltMul.o [3]
+__aeabi_fsub             0x800'1add          Code  Gb  FltSub.o [3]
+__aeabi_i2d              0x800'0bd5          Code  Gb  S32ToDbl.o [3]
+__aeabi_i2f              0x800'19e1          Code  Gb  S32ToFlt.o [3]
+__aeabi_memclr4          0x800'2a09          Code  Gb  ABImemclr4.o [4]
+__aeabi_memcpy           0x800'2a11          Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy4          0x800'2a31          Code  Gb  ABImemcpy.o [4]
+__aeabi_memcpy8          0x800'2a31          Code  Gb  ABImemcpy.o [4]
+__aeabi_ui2d             0x800'1c6d          Code  Gb  U32ToDbl.o [3]
+__aeabi_ui2f             0x800'2141          Code  Gb  U32ToFlt.o [3]
+__cmain                  0x800'55d1          Code  Gb  cmain.o [4]
+__exit                   0x800'5605    0x14  Code  Gb  exit.o [5]
+__iar_Memset4_word       0x800'3295          Code  Gb  ABImemset48.o [4]
+__iar_Memset8_word       0x800'3295          Code  Gb  ABImemset48.o [4]
+__iar_copy_init3         0x800'5535    0x2c  Code  Gb  copy_init3.o [4]
+__iar_dadd               0x800'215d          Code  Gb  DblSub.o [3]
+__iar_data_init3         0x800'5561    0x28  Code  Gb  data_init.o [4]
+__iar_dsub               0x800'0de5          Code  Gb  DblAdd.o [3]
+__iar_dsubStart          0x800'0df7          Code  Gb  DblAdd.o [3]
+__iar_fadd               0x800'1ae9          Code  Gb  FltSub.o [3]
+__iar_fsub               0x800'1b69          Code  Gb  FltAdd.o [3]
+__iar_fsubStart          0x800'1b79          Code  Gb  FltAdd.o [3]
+__iar_program_start      0x800'56a9          Code  Gb  cstartup_M.o [4]
+__iar_zero_init3         0x800'0bf7    0x3a  Code  Gb  zero_init3.o [4]
+__low_level_init         0x800'55ef     0x4  Code  Gb  low_level_init.o [2]
+__vector_table           0x800'0000          Data  Gb  startup_mm32f327x_iar.o [1]
+__vector_table_0x1c      0x800'001c          Data  Gb  startup_mm32f327x_iar.o [1]
+_call_main               0x800'55dd          Code  Gb  cmain.o [4]
+_exit                    0x800'55f9          Code  Gb  cexit.o [4]
+_main                    0x800'55eb          Code  Gb  cmain.o [4]
+afio_init                0x800'2c77    0xe8  Code  Gb  zf_gpio.o [1]
+angle                   0x2000'4908     0x2  Data  Gb  imu.o [1]
+angle_final             0x2000'490a     0x2  Data  Gb  imu.o [1]
+angle_set               0x2000'00e0     0x2  Data  Gb  maincontrol.o [1]
+angle_test              0x2000'0014     0x4  Data  Gb  maincontrol.o [1]
+beacon_area             0x2000'48e8     0x4  Data  Gb  maincontrol.o [1]
+beacon_check_frame      0x2000'4926     0x1  Data  Gb  maincontrol.o [1]
+beacon_flag             0x2000'4927     0x1  Data  Gb  maincontrol.o [1]
+beacon_list             0x2000'44e8   0x198  Data  Gb  maincontrol.o [1]
+beacon_x                0x2000'48d8     0x4  Data  Gb  maincontrol.o [1]
+beacon_y                0x2000'48dc     0x4  Data  Gb  maincontrol.o [1]
+board_init               0x800'4e65    0x24  Code  Gb  board.o [1]
+camera_buffer_addr      0x2000'48d0     0x4  Data  Gb  common.o [1]
+camera_dma_init          0x800'2ebd    0xc8  Code  Gb  zf_camera.o [1]
+camera_tim_etr_init      0x800'2f85   0x14c  Code  Gb  zf_camera.o [1]
+camera_type             0x2000'4924     0x1  Data  Gb  common.o [1]
+cut_flag                0x2000'492a     0x1  Data  Gb  maincontrol.o [1]
+cut_point               0x2000'0010     0x4  Data  Gb  maincontrol.o [1]
+direction               0x2000'4810    0x20  Data  Gb  pid.o [1]
+domain                  0x2000'47f0    0x20  Data  Gb  image.o [1]
+down_point              0x2000'000c     0x4  Data  Gb  maincontrol.o [1]
+exit                     0x800'55f3     0x4  Code  Gb  exit.o [2]
+exti_interrupt_init      0x800'2d89    0xfc  Code  Gb  zf_exti.o [1]
+flash_buffer            0x2000'40e8   0x400  Data  Gb  flash.o [1]
+flash_check              0x800'42a1    0x3c  Code  Gb  zf_flash.o [1]
+flash_erase_page         0x800'42dd    0x48  Code  Gb  zf_flash.o [1]
+flash_erase_page::gFlashStatus
+                        0x2000'00e4     0x1  Data  Lc  zf_flash.o [1]
+flash_flag              0x2000'0000     0x4  Data  Gb  flash.o [1]
+flash_page_program       0x800'4361    0x78  Code  Gb  zf_flash.o [1]
+flash_page_program::gFlashStatus
+                        0x2000'00e5     0x1  Data  Lc  zf_flash.o [1]
+flash_page_read          0x800'4325    0x3c  Code  Gb  zf_flash.o [1]
+frame                   0x2000'00e2     0x1  Data  Gb  maincontrol.o [1]
+get_config               0x800'14e5    0x62  Code  Gb  SEEKFREE_MT9V03X.o [1]
+get_icm20602_accdata_spi
+                         0x800'1941    0x42  Code  Gb  SEEKFREE_ICM20602.o [1]
+get_icm20602_gyro_spi    0x800'1983    0x42  Code  Gb  SEEKFREE_ICM20602.o [1]
+gpio_get                 0x800'2d5f    0x22  Code  Gb  zf_gpio.o [1]
+gpio_group              0x2000'006c    0x20  Data  Gb  zf_gpio.o [1]
+gpio_init                0x800'2b09   0x16e  Code  Gb  zf_gpio.o [1]
+gyro_pid                0x2000'4870    0x20  Data  Gb  pid.o [1]
+icm_acc_x               0x2000'491e     0x2  Data  Gb  SEEKFREE_ICM20602.o [1]
+icm_acc_y               0x2000'4920     0x2  Data  Gb  SEEKFREE_ICM20602.o [1]
+icm_acc_z               0x2000'4922     0x2  Data  Gb  SEEKFREE_ICM20602.o [1]
+icm_gyro_x              0x2000'4918     0x2  Data  Gb  SEEKFREE_ICM20602.o [1]
+icm_gyro_y              0x2000'491a     0x2  Data  Gb  SEEKFREE_ICM20602.o [1]
+icm_gyro_z              0x2000'491c     0x2  Data  Gb  SEEKFREE_ICM20602.o [1]
+icm_spi_r_reg_bytes      0x800'1915    0x2c  Code  Lc  SEEKFREE_ICM20602.o [1]
+image_binr              0x2000'00e8  0x2000  Data  Gb  image.o [1]
+k_z                     0x2000'0020     0x4  Data  Gb  othercontrol.o [1]
+last_beacon_x           0x2000'48e0     0x4  Data  Gb  maincontrol.o [1]
+last_beacon_y           0x2000'48e4     0x4  Data  Gb  maincontrol.o [1]
+lastleftpwm             0x2000'490e     0x2  Data  Gb  isr.o [1]
+lastrightpwm            0x2000'490c     0x2  Data  Gb  isr.o [1]
+leftpwm                 0x2000'4914     0x2  Data  Gb  maincontrol.o [1]
+main                     0x800'5589    0x24  Code  Gb  main.o [1]
+menu_button_flag        0x2000'492c     0x1  Data  Gb  menu.o [1]
+menu_flag               0x2000'0018     0x4  Data  Gb  menu.o [1]
+menu_pointer            0x2000'001c     0x4  Data  Gb  menu.o [1]
+mt9v03x_dma              0x800'1637    0x14  Code  Gb  SEEKFREE_MT9V03X.o [1]
+mt9v03x_dma_init         0x800'1579    0x46  Code  Gb  SEEKFREE_MT9V03X.o [1]
+mt9v03x_exti_init        0x800'1547    0x24  Code  Gb  SEEKFREE_MT9V03X.o [1]
+mt9v03x_finish_flag     0x2000'492e     0x1  Data  Gb  SEEKFREE_MT9V03X.o [1]
+mt9v03x_image           0x2000'20e8  0x2000  Data  Gb  SEEKFREE_MT9V03X.o [1]
+mt9v03x_init             0x800'15bf    0x64  Code  Gb  SEEKFREE_MT9V03X.o [1]
+mt9v03x_tim1_etr_init    0x800'156b     0xe  Code  Gb  SEEKFREE_MT9V03X.o [1]
+mt9v03x_uart_callback    0x800'1441    0x36  Code  Gb  SEEKFREE_MT9V03X.o [1]
+mt9v03x_vsync            0x800'1623    0x14  Code  Gb  SEEKFREE_MT9V03X.o [1]
+nvic_init                0x800'2e89    0x22  Code  Gb  common.o [1]
+oled_6x8                 0x800'5224   0x228  Data  Gb  SEEKFREE_FONT.o [1]
+oled_8x16                0x800'44e0   0x5f0  Data  Gb  SEEKFREE_FONT.o [1]
+oled_dis_bmpr            0x800'3875   0x268  Code  Gb  SEEKFREE_OLED.o [1]
+oled_fill                0x800'36c1    0x40  Code  Gb  SEEKFREE_OLED.o [1]
+oled_hexascii            0x800'3545    0x3a  Code  Lc  SEEKFREE_OLED.o [1]
+oled_init                0x800'357f   0x118  Code  Gb  SEEKFREE_OLED.o [1]
+oled_int16               0x800'3811    0x50  Code  Gb  SEEKFREE_OLED.o [1]
+oled_p6x8str             0x800'3701    0x70  Code  Gb  SEEKFREE_OLED.o [1]
+oled_p8x16str            0x800'3771    0xa0  Code  Gb  SEEKFREE_OLED.o [1]
+oled_set_pos             0x800'3697    0x2a  Code  Gb  SEEKFREE_OLED.o [1]
+oled_wrcmd               0x800'34db    0x6a  Code  Lc  SEEKFREE_OLED.o [1]
+oled_wrdat               0x800'3471    0x6a  Code  Lc  SEEKFREE_OLED.o [1]
+ov7725_cof_uart_interrupt
+                         0x800'13c5    0x36  Code  Gb  SEEKFREE_UART_7725.o [1]
+ov7725_dma               0x800'17cd    0x14  Code  Gb  SEEKFREE_7725.o [1]
+ov7725_finish_flag      0x2000'492d     0x1  Data  Gb  SEEKFREE_7725.o [1]
+ov7725_uart_dma          0x800'140f    0x14  Code  Gb  SEEKFREE_UART_7725.o [1]
+ov7725_uart_finish_flag
+                        0x2000'4931     0x1  Data  Gb  SEEKFREE_UART_7725.o [1]
+ov7725_uart_receive     0x2000'4900     0x4  Data  Lc  SEEKFREE_UART_7725.o [1]
+ov7725_uart_receive_flag
+                        0x2000'4933     0x1  Data  Lc  SEEKFREE_UART_7725.o [1]
+ov7725_uart_receive_num
+                        0x2000'4932     0x1  Data  Lc  SEEKFREE_UART_7725.o [1]
+ov7725_uart_vsync        0x800'13fb    0x14  Code  Gb  SEEKFREE_UART_7725.o [1]
+ov7725_vsync             0x800'17b9    0x14  Code  Gb  SEEKFREE_7725.o [1]
+pidout                  0x2000'48d4     0x4  Data  Gb  isr.o [1]
+pwm_duty_updata          0x800'2597    0xa4  Code  Gb  zf_pwm.o [1]
+pwm_enable               0x800'2555    0x42  Code  Gb  zf_pwm.o [1]
+pwm_enable_state        0x2000'48b0    0x20  Data  Gb  zf_pwm.o [1]
+pwm_init                 0x800'224b   0x30a  Code  Gb  zf_pwm.o [1]
+pwm_pin_init             0x800'2231    0x1a  Code  Lc  zf_pwm.o [1]
+receive                 0x2000'48fc     0x4  Data  Lc  SEEKFREE_MT9V03X.o [1]
+receive_num             0x2000'492f     0x1  Data  Lc  SEEKFREE_MT9V03X.o [1]
+rightpwm                0x2000'4916     0x2  Data  Gb  maincontrol.o [1]
+run_mode                0x2000'4928     0x1  Data  Gb  maincontrol.o [1]
+set_config               0x800'1477    0x6e  Code  Gb  SEEKFREE_MT9V03X.o [1]
+showMenuFlag            0x2000'492b     0x1  Data  Gb  menu.o [1]
+speed_cl                0x2000'4850    0x20  Data  Gb  pid.o [1]
+speed_set               0x2000'4912     0x2  Data  Gb  maincontrol.o [1]
+speed_test              0x2000'48f4     0x4  Data  Gb  maincontrol.o [1]
+spi_index               0x2000'008c     0xc  Data  Gb  zf_spi.o [1]
+spi_mosi                 0x800'3145    0x50  Code  Gb  zf_spi.o [1]
+state_judge              0x800'0191    0x34  Code  Gb  isr.o [1]
+systick_delay            0x800'2ab9    0x1e  Code  Gb  zf_systick.o [1]
+systick_delay_ms         0x800'2ad7    0x20  Code  Gb  zf_systick.o [1]
+tim_encoder_get_count    0x800'27a5    0x12  Code  Gb  zf_tim.o [1]
+tim_encoder_init         0x800'266f   0x114  Code  Gb  zf_tim.o [1]
+tim_encoder_pin_init     0x800'2655    0x1a  Code  Lc  zf_tim.o [1]
+tim_encoder_rst          0x800'2783    0x22  Code  Gb  zf_tim.o [1]
+tim_index               0x2000'0098    0x20  Data  Gb  zf_tim.o [1]
+tim_interrupt_init_ms    0x800'4e89    0xd6  Code  Gb  zf_pit.o [1]
+turn_kp                 0x2000'48ec     0x4  Data  Gb  maincontrol.o [1]
+turn_speed              0x2000'48f0     0x4  Data  Gb  maincontrol.o [1]
+uart_index              0x2000'00b8    0x20  Data  Gb  zf_uart.o [1]
+uart_init                0x800'27f9   0x17a  Code  Gb  zf_uart.o [1]
+uart_irq                0x2000'00d8     0x8  Data  Gb  zf_uart.o [1]
+uart_pin_init            0x800'27c5    0x34  Code  Lc  zf_uart.o [1]
+uart_putbuff             0x800'2973    0x2c  Code  Gb  zf_uart.o [1]
+uart_receive_flag       0x2000'4930     0x1  Data  Lc  SEEKFREE_MT9V03X.o [1]
+uart_rx_irq              0x800'299f    0x4e  Code  Gb  zf_uart.o [1]
+upr_help                0x2000'4890    0x20  Data  Gb  pid.o [1]
+upright                 0x2000'4830    0x20  Data  Gb  pid.o [1]
+
+
+[1] = F:\something\extra\competition\program\HDU_Crystal\cpu1\Project\IAR\program\Debug\Obj
+[2] = dl7M_tlf.a
+[3] = m7M_tl.a
+[4] = rt7M_tl.a
+[5] = shb_l.a
+
+  19 728 bytes of readonly  code memory
+   2 628 bytes of readonly  data memory
+  26 930 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
