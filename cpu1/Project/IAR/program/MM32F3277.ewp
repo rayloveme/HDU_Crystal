@@ -2155,6 +2155,12 @@
             <name>$PROJ_DIR$\..\..\CODE\pid.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\CODE\serial.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\CODE\serial.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\CODE\swj.c</name>
         </file>
         <file>

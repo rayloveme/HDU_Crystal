@@ -11,8 +11,8 @@
 #include "headfile.h"
 
 //全局变量区
-uint8 Motor_Limit_Ratio = 5;
-float k_z=0.1;
+uint8 Motor_Limit_Ratio = 4;
+float k_z = 0.1; //角速度起抑制转向的作用
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      int限幅
@@ -104,25 +104,24 @@ int16 Turn_Error_Filter(int16 error) //转向控制滑动输出滤波
 //-------------------------------------------------------------------------------------------------------------------
 void If_Find_Beacon(void)
 {
-    if (Domain_Find_Bin(image_binr,64,128) == 0)
-    {
-        beacon_check_frame++;
-        if (beacon_check_frame > frame)
-            beacon_flag = 0;
-        else
-        {
-            beacon_x=last_beacon_x;
-            beacon_y=last_beacon_y;
-        }
-    }
-    else
-    {
-        beacon_check_frame = 0;
-        last_beacon_x=beacon_x;
-        last_beacon_y=beacon_y;
-    }
+	if (Domain_Find_Bin(image_binr, 64, 128) == 0)
+	{
+		beacon_check_frame++;
+		if (beacon_check_frame > frame)
+			beacon_flag = 0;
+		else
+		{
+			beacon_x = last_beacon_x;
+			beacon_y = last_beacon_y;
+		}
+	}
+	else
+	{
+		beacon_check_frame = 0;
+		last_beacon_x = beacon_x;
+		last_beacon_y = beacon_y;
+	}
 }
-
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      切灯
@@ -132,9 +131,10 @@ void If_Find_Beacon(void)
 //-------------------------------------------------------------------------------------------------------------------
 void Cut_Set(uint8 DIR)
 {
-    if(DIR)
-       direction.value=turn_speed;
-//           +k_z*icm_gyro_z;
-    else
-       direction.value=-turn_speed-k_z*icm_gyro_z;
+	if (DIR)
+		turn_pwm = turn_speed;
+	//           +k_z*icm_gyro_z;
+	else
+		turn_pwm = -turn_speed;
+	//  -k_z*icm_gyro_z;
 }

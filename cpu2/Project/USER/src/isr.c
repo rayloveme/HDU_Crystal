@@ -10,135 +10,25 @@
 
 #include "headfile.h"
 #include "isr.h"
-uint8 spe_flag = 0;
-uint8 upr_flag = 1;
-int32 pidout = 0;
 
-static uint8 StateFlag = 0; //状态标志位
-static uint8 RunFlag = 0;
-
-#define DOWN_PROTECTION 1  //过低保护
-#define RUNING 2		   //正常运行状态
-#define OVER_PPROTECTION 3 //超调保护 嘿嘿
-
-#define CUT_STATE 1	   //切灯
-#define BEACON_STATE 2 //寻灯
-
-#define smooth_index 10				  //平滑因子，过度状态切换使用
-static uint8 state_chage_counter = 0; //状态变化计数器
-
-void state_judge(void)
-{ //状态判断函数
-	// uint8 state_flag_last = StateFlag;
-
-	if (angle_final > 2500) //弹射起飞
-	{
-		StateFlag = DOWN_PROTECTION;
-		Motor_Limit_Ratio = 6;
-	}
-	else //曲率加速
-	{
-		StateFlag = RUNING;
-		Motor_Limit_Ratio = 5;
-	}
-}
-
-int16 lastrightpwm = 0, lastleftpwm = 0;
 void TIM8_UP_IRQHandler(void) //中断 1ms
 {
 	uint32 state = TIM8->SR; // 读取中断状态
 
-	IMU_Get();
-
-	if (0)
-	{
-		leftpwm = upr_help.value;
-		rightpwm = upr_help.value;
-	}
-	else if (1)
-	{
-		//            pidout=0;
-		IncPid_Cal(&gyro_pid, icm_gyro_y, pidout);
-
-		lastleftpwm = leftpwm;
-		lastrightpwm = rightpwm;
-
-		leftpwm = -gyro_pid.value;
-		rightpwm = -gyro_pid.value;
-	}
-
-	direction.value = Int_Range_Protect(direction.value, -2000, 2000);
-
-	if (cut_flag)
-	{
-		//		speed_set = 1000;
-		leftpwm -= direction.value;
-
-		rightpwm += direction.value;
-	}
-	else
-	{
-		leftpwm -= direction.value;
-		rightpwm += direction.value;
-	}
-	leftpwm = 0.7 * leftpwm + 0.3 * lastleftpwm;
-	rightpwm = 0.7 * rightpwm + 0.3 * lastrightpwm;
-
-	PWM_dynamic_limit();
-
-	Motor_Set(leftpwm, rightpwm);
-
 	TIM8->SR &= ~state; // 清空中断状态
 }
 
-void TIM7_IRQHandler(void) //摄像头1中断  20ms
+void TIM7_IRQHandler(void) //发送图像数据中断  20ms
 {
 	uint32 state = TIM7->SR; // 读取中断状态
-
-	//    Wireless_Send_Img();
-
+	Send_To_CPU1();
 	TIM7->SR &= ~state; // 清空中断状态
 }
 
 void TIM6_IRQHandler(void) //中断  5ms
 {
 	uint32 state = TIM6->SR; // 读取中断状态
-	static uint16 time20ms = 0;
-	time20ms++;
 
-	Complementary_Filter();
-
-	Get_Encoder();
-	state_judge();
-
-	if (time20ms > 3)
-	{
-		LocPid_Cal(&speed_cl, L_C + R_C, speed_set);
-	}
-
-	//	switch (StateFlag)
-	switch (StateFlag)
-
-	{
-	case DOWN_PROTECTION:
-		//          LocPid_Cal(&upright, angle_final, angle_set + speed_cl.value);
-		//		LocPid_Cal(&upr_help, angle_final, angle_set);
-
-		LocPid_Cal(&upright, angle_final, angle_set);
-		pidout = -upright.value;
-
-		break;
-	case RUNING:
-
-		//                LocPid_Cal(&speed_cl, L_C + R_C, speed_set);
-		//		speed_cl.value=0;
-		LocPid_Cal(&upright, angle_final, 1000 + speed_cl.value);
-		pidout = -upright.value;
-
-		break;
-	}
-
-	Wireless_Send_Pra();
 	TIM6->SR &= ~state; // 清空中断状态
 }
 

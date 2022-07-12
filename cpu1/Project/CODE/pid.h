@@ -26,10 +26,10 @@ struct Pid        //Pid
 };
 
 extern struct Pid speed_cl,gyro_pid;
-extern struct Pid direction,upright,upr_help;
+extern struct Pid direction,upright,direction_2;
 
 uint8 Pid_Init(struct Pid* pid);
 int LocPid_Cal(struct Pid* pid, int act, int set);
 int IncPid_Cal(struct Pid* pid, int act, int set);
-
+int LocPid_Cal_Dir(struct Pid *pid, int act, int set);
 #endif

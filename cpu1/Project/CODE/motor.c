@@ -81,20 +81,20 @@ void R_Contorl(int pwm)
         pwm_duty_updata(TIM_5,TIM_5_CH3_A02,9500);
         pwm_duty_updata(TIM_5,TIM_5_CH4_A03,0);
     }
-    else if(pwm>1100)   //正转死区电压
+    else if(pwm>800)   //正转死区电压
     {
         pwm_duty_updata(TIM_5,TIM_5_CH3_A02,pwm);
         pwm_duty_updata(TIM_5,TIM_5_CH4_A03,0);
     }
     else if(pwm>0)
     {
-        pwm_duty_updata(TIM_5,TIM_5_CH3_A02,1100);
+        pwm_duty_updata(TIM_5,TIM_5_CH3_A02,800);
         pwm_duty_updata(TIM_5,TIM_5_CH4_A03,0);
     }
-    else if(pwm>=-1000) //反转死区电压
+    else if(pwm>=-800) //反转死区电压
     {
         pwm_duty_updata(TIM_5,TIM_5_CH3_A02,0);
-        pwm_duty_updata(TIM_5,TIM_5_CH4_A03,1000);
+        pwm_duty_updata(TIM_5,TIM_5_CH4_A03,800);
     }
     else if(pwm>=-9500)
     {
@@ -119,5 +119,5 @@ void R_Contorl(int pwm)
 void Motor_Set(int Lpwm,int Rpwm)
 {
     L_Contorl(Lpwm);
-    R_Contorl(Rpwm);
+    R_Contorl(-Rpwm);
 }

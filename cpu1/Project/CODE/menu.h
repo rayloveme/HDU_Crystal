@@ -22,7 +22,7 @@
 #define KEY_DOWN        gpio_get(G4)
 
 #define MENU_NUMBER 23
-#define PAGE_NUMBER 3
+#define PAGE_NUMBER 4
 
 typedef struct sMenu{
 

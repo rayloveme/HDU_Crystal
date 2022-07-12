@@ -21,7 +21,8 @@ void Wireless_Init(void)
     //        seekfree_wireless_init();
 
     uart_init(UART_4, 460800, UART4_TX_C10, UART4_RX_C11);
-    // uart_rx_irq(UART_4, ENABLE);// 使能 UART4 的接收中断
+
+    uart_rx_irq(UART_4, 1);// 使能 UART4 的接收中断
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -34,28 +35,26 @@ void Wireless_Send_Pra(void)
 {
     uint8 data_buff[30] = {0};
     uint8 buff0[4], buff1[4], buff2[2], buff3[2], buff4[2], buff5[2], buff6[2];
-    uint16 flag = Down_Point_flag;
+    uint16 flag = beacon_flag_2;
     int16 spe_set = speed_set;
 
-    // int16 spe=L_C+R_C;
+     int16 spe=L_C+R_C;
     //这一段根据自己需求来即可
     /*常用值 icm_gyro_x,icm_gyro_y,icm_gyro_z,
     icm_acc_x,icm_acc_y,icm_acc_z,angle_final
     L_C,R_C,beacon_x,beacon_y
     */
 
-    //    int16 angacc = ang_acc * 100.0;
-    //    int16 angyro = ang_gyro * 100.0;
-    int16 angacc = angle;
-    memcpy(buff0, &beacon_x, 4);
-    memcpy(buff1, &beacon_y, 4);
-    memcpy(buff2, &angacc, 2);
+//    int16 angacc = angacc;
+    memcpy(buff0, &beacon_x_2, 4);
+    memcpy(buff1, &beacon_y_2, 4);
+    memcpy(buff2, &spe, 2);
     //    memcpy(buff3, &angyro, 2);
     //    memcpy(buff4, &spe,2);
     memcpy(buff3, &flag, 2);
     memcpy(buff4, &spe_set, 2);
-    memcpy(buff5, &icm_acc_z, 2);
-    memcpy(buff6, &icm_gyro_y, 2); //往下降低 往上增加
+    memcpy(buff5, &angle_final, 2);
+    memcpy(buff6, &rightpwm, 2); //往下降低 往上增加
 
     uint8 _cnt = 0;
     data_buff[_cnt++] = 0xAA;

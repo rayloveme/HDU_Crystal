@@ -196,7 +196,7 @@ void uart_tx_irq(UARTN_enum uartn, uint32 status)
 // @param		uartn			串口模块号
 // @param		status			1：打开中断   0：关闭中断
 // @return		void
-// Sample usage:				uart_rx_irq(UART_1,1,1);										// 打开串口1接收完成中断
+// Sample usage:				uart_rx_irq(UART_1,1);										// 打开串口1接收完成中断
 //-------------------------------------------------------------------------------------------------------------------
 void uart_rx_irq(UARTN_enum uartn, uint32 status)
 {

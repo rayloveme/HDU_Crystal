@@ -34,7 +34,7 @@ void IMU_Get(void)
 
     get_icm20602_accdata_spi();
     get_icm20602_gyro_spi();
-    icm_gyro_y = icm_gyro_y + 6;
+    icm_gyro_y = icm_gyro_y -8;
 }
 
 //float ang_acc = 0.0, ang_gyro = 0.0, ang = 0.0;

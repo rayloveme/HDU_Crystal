@@ -135,8 +135,7 @@ void Image_Get(void)
 {
     if (mt9v03x_finish_flag)
     {
-        Image_Binarization(mt9v03x_image, image_binr, 110);
-        //            Blink_Img_Fliter();
+        Image_Binarization(mt9v03x_image, image_binr, THRESHOLD);
         mt9v03x_finish_flag = 0;
     }
 }

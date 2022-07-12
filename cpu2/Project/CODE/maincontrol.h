@@ -14,24 +14,12 @@
 #include "headfile.h"
 
 
-
-#define std_ANGLE 1500
-#define high_ANGLE 1000
-#define low_ANGLE 2000
-
-
-
 extern uint8 beacon_list[405],frame,beacon_check_frame,beacon_flag;
-extern uint8 Down_Point_flag,run_mode;
 extern uint32 beacon_x,last_beacon_x,beacon_area,beacon_area_last;
 extern uint32 beacon_y,last_beacon_y;
 extern uint32 down_point,cut_point,turn_kp,turn_speed;
-extern int16 leftpwm,rightpwm,area_change_rate;
-extern uint16 angle_set;
-extern int16 speed_set;
+extern int16 area_change_rate;
 
-extern uint32 angle_test,speed_test;
-extern uint8 pid_flag,cut_flag;
 
 
 void All_Init(void);

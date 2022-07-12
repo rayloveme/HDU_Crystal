@@ -58,16 +58,15 @@
 
 //--------------ray-----------------
 #include "maincontrol.h"
-#include "encoder.h"
-#include "imu.h"
-#include "menu.h"
-#include "motor.h"
-#include "pid.h"
-#include "flash.h"
 #include "image.h"
-#include "wireless.h"
-#include "swj.h"
-#include "mymath.h"
 #include "othercontrol.h"
+#include "buzzer.h"
+#include "serial.h"
+
+
+#define BUZZER_OFF gpio_set(G2, 1)
+#define BUZZER_ON gpio_set(G2, 0)
+#define THRESHOLD 110
+
 #endif
 

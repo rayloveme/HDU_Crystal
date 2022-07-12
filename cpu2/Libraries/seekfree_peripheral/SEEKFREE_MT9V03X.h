@@ -36,6 +36,8 @@
 //配置摄像头参数
 // MM32SPIN27 毕竟只是个 M0 内核的单片机 SRAM 只有 12KB 采集不了完整分辨率的图像
 // 188*50=9400 大概是 9.18KB
+#define EXP_time 450
+#define CAMERA_GAIN 32
 #define MT9V03X_W               128		// 图像宽度  范围1-752
 #define MT9V03X_H               64		// 图像高度	范围1-480
 

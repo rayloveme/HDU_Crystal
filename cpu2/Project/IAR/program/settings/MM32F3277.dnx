@@ -46,10 +46,10 @@
         <MemConfigValue>E:\IAR\arm\CONFIG\debugger\MindMotion\MM32F3270.ddf</MemConfigValue>
     </PlDriver>
     <Jet>
-        <PrevWtdReset>System</PrevWtdReset>
-        <OnlineReset>System</OnlineReset>
         <JetConnSerialNo>SEEKFREE CMSIS-DAP V2:0</JetConnSerialNo>
         <JetConnFoundProbes>SEEKFREE CMSIS-DAP V1:SF-1281650933472:SEEKFREE CMSIS-DAP V2:0:</JetConnFoundProbes>
+        <PrevWtdReset>System</PrevWtdReset>
+        <OnlineReset>System</OnlineReset>
         <DisableInterrupts>0</DisableInterrupts>
         <LeaveRunning>1</LeaveRunning>
         <MultiCoreRunAll>0</MultiCoreRunAll>
@@ -58,7 +58,7 @@
         <EnableCache>1</EnableCache>
     </ArmDriver>
     <DebugChecksum>
-        <Checksum>3788020371</Checksum>
+        <Checksum>587054252</Checksum>
     </DebugChecksum>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>

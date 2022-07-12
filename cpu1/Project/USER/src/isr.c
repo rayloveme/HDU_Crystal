@@ -31,7 +31,7 @@ void state_judge(void)
 { //状态判断函数
 	// uint8 state_flag_last = StateFlag;
 
-	if (angle_final > 2500) //弹射起飞
+	if (angle_final > 3500) //弹射起飞
 	{
 		StateFlag = DOWN_PROTECTION;
 		Motor_Limit_Ratio = 6;
@@ -50,37 +50,23 @@ void TIM8_UP_IRQHandler(void) //中断 1ms
 
 	IMU_Get();
 
-	if (0)
-	{
-		leftpwm = upr_help.value;
-		rightpwm = upr_help.value;
-	}
-	else if (1)
-	{
-		//            pidout=0;
-		IncPid_Cal(&gyro_pid, icm_gyro_y, pidout);
+	// pidout = 0;
 
-		lastleftpwm = leftpwm;
-		lastrightpwm = rightpwm;
+	IncPid_Cal(&gyro_pid, icm_gyro_y, pidout);
 
-		leftpwm = -gyro_pid.value;
-		rightpwm = -gyro_pid.value;
-	}
+	lastleftpwm = leftpwm;
+	lastrightpwm = rightpwm;
 
-	direction.value = Int_Range_Protect(direction.value, -2000, 2000);
+	leftpwm = -gyro_pid.value;
+	rightpwm = -gyro_pid.value;
 
-	if (cut_flag)
-	{
-		//		speed_set = 1000;
-		leftpwm -= direction.value;
+	turn_pwm = Int_Range_Protect(turn_pwm, -2000, 2000);
 
-		rightpwm += direction.value;
-	}
-	else
-	{
-		leftpwm -= direction.value;
-		rightpwm += direction.value;
-	}
+	//turn_pwm = 0;
+
+	leftpwm -= turn_pwm;
+	rightpwm += turn_pwm;
+
 	leftpwm = 0.7 * leftpwm + 0.3 * lastleftpwm;
 	rightpwm = 0.7 * rightpwm + 0.3 * lastrightpwm;
 
@@ -113,35 +99,72 @@ void TIM6_IRQHandler(void) //中断  5ms
 
 	if (time20ms > 3)
 	{
+		time20ms = 0;
 		LocPid_Cal(&speed_cl, L_C + R_C, speed_set);
 	}
 
-	//	switch (StateFlag)
-	switch (StateFlag)
+		switch (StateFlag)
+//	switch (RUNING)
 
 	{
 	case DOWN_PROTECTION:
-		//          LocPid_Cal(&upright, angle_final, angle_set + speed_cl.value);
+	{ //          LocPid_Cal(&upright, angle_final, angle_set + speed_cl.value);
 		//		LocPid_Cal(&upr_help, angle_final, angle_set);
 
 		LocPid_Cal(&upright, angle_final, angle_set);
 		pidout = -upright.value;
 
 		break;
+	}
 	case RUNING:
-
+	{
 		//                LocPid_Cal(&speed_cl, L_C + R_C, speed_set);
-		//		speed_cl.value=0;
-		LocPid_Cal(&upright, angle_final, 1000 + speed_cl.value);
+		if ((angle_final > 1900 + speed_cl.value) || (angle_final < 1500 + speed_cl.value))
+			LocPid_Cal(&upright, angle_final, angle_set + speed_cl.value);
 		pidout = -upright.value;
 
 		break;
+	}
 	}
 
 	Wireless_Send_Pra();
 	TIM6->SR &= ~state; // 清空中断状态
 }
 
+void UART3_IRQHandler(void)
+{
+	if (UART3->ISR & UART_ISR_TX_INTF) // 串口发送缓冲空中断
+	{
+		UART3->ICR |= UART_ICR_TXICLR; // 清除中断标志位
+	}
+	if (UART3->ISR & UART_ISR_RX_INTF) // 串口接收缓冲中断
+	{
+		UART3->ICR |= UART_ICR_RXICLR; // 清除中断标志位
+
+		uint8 dat;
+		uart_getchar(UART_3, &dat);
+		Send_Process(dat);
+	}
+}
+
+void UART4_IRQHandler(void)
+{
+	if (UART4->ISR & UART_ISR_TX_INTF) // 串口发送缓冲空中断
+	{
+		UART4->ICR |= UART_ICR_TXICLR; // 清除中断标志位
+	}
+	if (UART4->ISR & UART_ISR_RX_INTF) // 串口接收缓冲中断
+	{
+		UART4->ICR |= UART_ICR_RXICLR; // 清除中断标志位
+
+		uint8 dat;
+		uart_getchar(UART_4, &dat);
+		if (dat == 0x01)
+		{
+			speed_set -= 500;
+		}
+	}
+}
 void TIM1_UP_IRQHandler(void)
 {
 	uint32 state = TIM1->SR; // 读取中断状态
@@ -193,30 +216,6 @@ void UART2_IRQHandler(void)
 	if (UART2->ISR & UART_ISR_RX_INTF) // 串口接收缓冲中断
 	{
 		UART2->ICR |= UART_ICR_RXICLR; // 清除中断标志位
-	}
-}
-
-void UART3_IRQHandler(void)
-{
-	if (UART3->ISR & UART_ISR_TX_INTF) // 串口发送缓冲空中断
-	{
-		UART3->ICR |= UART_ICR_TXICLR; // 清除中断标志位
-	}
-	if (UART3->ISR & UART_ISR_RX_INTF) // 串口接收缓冲中断
-	{
-		UART3->ICR |= UART_ICR_RXICLR; // 清除中断标志位
-	}
-}
-
-void UART4_IRQHandler(void)
-{
-	if (UART4->ISR & UART_ISR_TX_INTF) // 串口发送缓冲空中断
-	{
-		UART4->ICR |= UART_ICR_TXICLR; // 清除中断标志位
-	}
-	if (UART4->ISR & UART_ISR_RX_INTF) // 串口接收缓冲中断
-	{
-		UART4->ICR |= UART_ICR_RXICLR; // 清除中断标志位
 	}
 }
 

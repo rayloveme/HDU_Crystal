@@ -40,14 +40,22 @@ void Flash_Write(void)
     flash_buffer[16]=gyro_pid.Kp;
     flash_buffer[17]=gyro_pid.Ki;
     flash_buffer[18]=gyro_pid.Kd;
-    flash_buffer[19]=upr_help.Kp;
-    flash_buffer[20]=upr_help.Ki;
-    flash_buffer[21]=upr_help.Kd;
+    flash_buffer[19]=direction_2.Kp;
+    flash_buffer[20]=direction_2.Ki;
+    flash_buffer[21]=direction_2.Kd;
 
 
+
+    uart_rx_irq(UART_3, 0);
 
     flash_erase_page(SECTION_INDEX,PAGE_INDEX);
     flash_page_program(SECTION_INDEX,PAGE_INDEX,flash_buffer,DATA_SIZE);
+
+
+    systick_delay_ms(1000);
+
+    uart_rx_irq(UART_3, 1);
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -96,9 +104,9 @@ void Flash_Read(void)
         gyro_pid.Kp =flash_buffer[16];
         gyro_pid.Ki =flash_buffer[17];
         gyro_pid.Kd =flash_buffer[18];
-        upr_help.Kp =flash_buffer[19];
-        upr_help.Ki =flash_buffer[20];
-        upr_help.Kd =flash_buffer[21];
+        direction_2.Kp =flash_buffer[19];
+        direction_2.Ki =flash_buffer[20];
+        direction_2.Kd =flash_buffer[21];
 
     }
 }

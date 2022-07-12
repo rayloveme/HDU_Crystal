@@ -69,5 +69,6 @@
 #include "swj.h"
 #include "mymath.h"
 #include "othercontrol.h"
+#include "serial.h"
 #endif
 

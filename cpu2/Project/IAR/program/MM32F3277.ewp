@@ -2092,16 +2092,10 @@
     <group>
         <name>code</name>
         <file>
-            <name>$PROJ_DIR$\..\..\CODE\encoder.c</name>
+            <name>$PROJ_DIR$\..\..\CODE\buzzer.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\CODE\encoder.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\flash.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\flash.h</name>
+            <name>$PROJ_DIR$\..\..\CODE\buzzer.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\CODE\image.c</name>
@@ -2110,37 +2104,10 @@
             <name>$PROJ_DIR$\..\..\CODE\image.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\CODE\imu.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\imu.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\imufilter_useless.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\..\CODE\maincontrol.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\CODE\maincontrol.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\menu.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\menu.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\motor.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\motor.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\mymath.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\mymath.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\CODE\othercontrol.c</name>
@@ -2149,22 +2116,10 @@
             <name>$PROJ_DIR$\..\..\CODE\othercontrol.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\CODE\pid.c</name>
+            <name>$PROJ_DIR$\..\..\CODE\serial.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\CODE\pid.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\swj.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\swj.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\wireless.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\wireless.h</name>
+            <name>$PROJ_DIR$\..\..\CODE\serial.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\CODE\本文件夹作用.txt</name>

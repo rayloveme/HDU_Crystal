@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "headfile.h": "c",
+        "menu.h": "c",
+        "zf_uart.h": "c",
+        "zf_camera.h": "c",
+        "seekfree_mt9v03x.h": "c"
+    }
+}
