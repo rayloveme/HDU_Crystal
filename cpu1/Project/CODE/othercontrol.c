@@ -104,7 +104,9 @@ int16 Turn_Error_Filter(int16 error) //转向控制滑动输出滤波
 //-------------------------------------------------------------------------------------------------------------------
 void If_Find_Beacon(void)
 {
-	if (Domain_Find_Bin(image_binr, 64, 128) == 0)
+
+	if (Beacon_Find_Bin(image_binr) == 0)
+	// if (Domain_Find_Bin(image_binr, 64, 128) == 0)
 	{
 		beacon_check_frame++;
 		if (beacon_check_frame > frame)
@@ -137,4 +139,43 @@ void Cut_Set(uint8 DIR)
 	else
 		turn_pwm = -turn_speed;
 	//  -k_z*icm_gyro_z;
+}
+
+int16 jiansu_zone[13][4] = {{3200, 3400, 3900, 9999},
+							{2950, 3150, 3700, 4650},
+							{2650, 2900, 3350, 4350},
+							{2350, 2600, 3100, 4000},
+							{2100, 2350, 2800, 3650},
+							{1850, 2100, 2550, 3350},
+							{1650, 1850, 2250, 3000},
+							{1450, 1620, 2000, 2650},
+							{1200, 1400, 1750, 2350},
+							{0000, 1200, 1500, 2000},
+							{0000, 0000, 1250, 1750},
+							{0000, 0000, 0000, 1450},
+							{0000, 0000, 0000, 1350}};
+uint8 jiansu_flag = 0;
+void Jiansu_Judge(void)
+{
+	uint8 temp = beacon_y_2 / 5;
+	if (angle_final <= jiansu_zone[temp][0])
+	{
+		jiansu_flag = 1;
+		speed_set = 875;
+	}
+	else if (angle_final <= jiansu_zone[temp][1])
+	{
+		jiansu_flag = 2;
+		speed_set = 750;
+	}
+	else if (angle_final <= jiansu_zone[temp][2])
+	{
+		jiansu_flag = 3;
+		speed_set = 625;
+	}
+	else if (angle_final <= jiansu_zone[temp][3])
+	{
+		jiansu_flag = 4;
+		speed_set = 500;
+	}
 }

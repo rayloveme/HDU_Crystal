@@ -15,6 +15,7 @@ int main(void)
     menu_flag = 1; //菜单标志位
     while (1)
     {
+
         Main_Control();
         if (menu_flag)
         {

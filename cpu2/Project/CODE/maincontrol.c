@@ -12,7 +12,6 @@
 
 //全局变量区
 
-
 uint8 frame = 1;
 uint8 beacon_check_frame = 0;
 uint8 beacon_flag = 0;
@@ -31,24 +30,25 @@ uint32 beacon_area = 0, beacon_area_last = 0;
 void All_Init(void)
 {
     board_init(false); // 初始化 debug输出串口
-    oled_init();
+                       //    oled_init();
     Beacon_List_Init();
     Param_Cfg();
     Send_Init();
-    oled_p8x16str(0, 0, "Camera init...");
+    //    oled_p8x16str(0, 0, "Camera init...");
     mt9v03x_init();
     oled_fill(0x00);
-    Buzzer_Init();
+    seekfree_wireless_init();
+    //    Buzzer_Init();
 
-    BUZZER_ON;
-    systick_delay_ms(100);
-    BUZZER_OFF;
-    systick_delay_ms(100);
-    BUZZER_ON;
-    systick_delay_ms(100);
-    BUZZER_OFF;
+    //    BUZZER_ON;
+    //    systick_delay_ms(100);
+    //    BUZZER_OFF;
+    //    systick_delay_ms(100);
+    //    BUZZER_ON;
+    //    systick_delay_ms(100);
+    //    BUZZER_OFF;
 
-    tim_interrupt_init_ms(TIM_7, 20, 2); //参数发送中断
+    tim_interrupt_init_ms(TIM_7, 10, 2); //参数发送中断
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -62,9 +62,13 @@ void Main_Control(void)
 {
     Image_Get();
     If_Find_Beacon();
-    if(beacon_flag)BUZZER_ON;
-    else BUZZER_OFF;
-    oled_dis_bmpr(64,128,image_binr[0]);
+        sendimg_WIFI(mt9v03x_image[0], 128, 64);
+//    sendimg_WIFI_binary_CHK(mt9v03x_image[0], 128, 64, THRESHOLD, 5);
+//    put_int32_WIFI(0, (int32)beacon_x);
+//    put_int32_WIFI(1, (int32)beacon_y);
+    //    if(beacon_flag)BUZZER_ON;
+    //    else BUZZER_OFF;
+    //    oled_dis_bmpr(64,128,image_binr[0]);
 }
 
 //-------------------------------------------------------------------------------------------------------------------

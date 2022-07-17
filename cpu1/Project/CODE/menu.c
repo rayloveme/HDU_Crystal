@@ -199,6 +199,12 @@ void Show_Control(void)
         oled_int16(46, 6, direction_2.Kd);
         oled_int16(46, 7, direction_2.value);
 
+        oled_int16(90, 1, icm_gyro_z);
+
+        oled_int16(90, 3, angle_final);
+        oled_int16(90, 4, beacon_x);
+        oled_int16(90, 5, beacon_y);
+
 
 
     }

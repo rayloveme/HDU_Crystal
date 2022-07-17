@@ -20,6 +20,7 @@ uint32 Uint_Range_Protect(uint32 duty, uint32 min, uint32 max);
 void PWM_dynamic_limit(void);
 void If_Find_Beacon(void);
 void Cut_Set(uint8 DIR);
+void Jiansu_Judge(void);
 
 
 

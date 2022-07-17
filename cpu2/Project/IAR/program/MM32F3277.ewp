@@ -2122,6 +2122,12 @@
             <name>$PROJ_DIR$\..\..\CODE\serial.h</name>
         </file>
         <file>
+            <name>$PROJ_DIR$\..\..\CODE\swj.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\CODE\swj.h</name>
+        </file>
+        <file>
             <name>$PROJ_DIR$\..\..\CODE\本文件夹作用.txt</name>
         </file>
     </group>

@@ -29,6 +29,7 @@ struct Domain //¡¨Õ®”Ú
 extern uint8 image_binr[ROW][COL];
 
 extern struct Domain domain[DOMAIN_NUMBER];
+uint8 Beacon_Find_Bin(uint8 image[ROW][COL]);
 
 void Image_Binarization(uint8 image[ROW][COL], uint8 image_binr[ROW][COL], uint8 value);
 uint8 Domain_Find_Bin(uint8 image[ROW][COL], uint8 height, uint8 width);

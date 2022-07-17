@@ -25,10 +25,13 @@ extern int16 turn_pwm;
 extern uint32 angle_test,speed_test;
 extern uint8 pid_flag,cut_flag;
 
+extern float  speed_set_now;
+
 extern uint32 beacon_x_2,beacon_y_2,beacon_area_2;
 extern uint8 beacon_flag_2,beacon_list_2[405];
 
 
+extern float jiansu_t_max;
 
 void All_Init(void);
 void Main_Control(void);

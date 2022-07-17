@@ -19,6 +19,9 @@
 void Send_Init(void)
 {
     uart_init(UART_3, 115200, UART3_TX_D08, UART3_RX_D09);
+
+   // uart_init(UART_5, 115200, UART5_TX_A04, UART5_RX_A05);
+
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -57,4 +60,6 @@ void Send_To_CPU1(void)
     data_buff[_cnt++] = 0xCC;
 
     uart_putbuff(UART_3, &data_buff[0], _cnt);
+   //     uart_putbuff(UART_5, &data_buff[0], _cnt);
+
 }

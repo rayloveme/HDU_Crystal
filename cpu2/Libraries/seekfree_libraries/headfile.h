@@ -62,11 +62,11 @@
 #include "othercontrol.h"
 #include "buzzer.h"
 #include "serial.h"
-
+#include "swj.h"
 
 #define BUZZER_OFF gpio_set(G2, 1)
 #define BUZZER_ON gpio_set(G2, 0)
-#define THRESHOLD 110
+#define THRESHOLD 60
 
 #endif
 

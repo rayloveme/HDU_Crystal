@@ -33,7 +33,7 @@
 #define WIRELESS_UART			UART_4												// 无线转串口模块 所使用到的串口
 #define WIRELESS_UART_TX		UART4_TX_C10
 #define WIRELESS_UART_RX		UART4_RX_C11
-#define WIRELESS_UART_BAUD		460800
+#define WIRELESS_UART_BAUD		3000000
 
 #define RTS_PIN					C12													// 定义流控位引脚  指示当前模块是否可以接受数据  0可以继续接收  1不可以继续接收
 

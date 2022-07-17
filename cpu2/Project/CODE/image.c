@@ -61,10 +61,10 @@ uint8 Domain_Find_Bin(uint8 image[ROW][COL], uint8 height, uint8 width)
             {
                 if (find_flag == 0)
                 {
+                    left = j;
+                    down = i;
                     find_flag = 1;
                 }
-                left = j;
-                down = i;
                 up = i;
                 right = j;
                 line_area++;
