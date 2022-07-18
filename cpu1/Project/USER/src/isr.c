@@ -70,18 +70,19 @@ void TIM8_UP_IRQHandler(void) //ÖÐ¶Ï 1ms
 	leftpwm = 0.7 * leftpwm + 0.3 * lastleftpwm;
 	rightpwm = 0.7 * rightpwm + 0.3 * lastrightpwm;
 
-	if ((L_C > 1000 || R_C > 1000) && icm_gyro_x > 1000)
+	if (((L_C > 1000 || R_C > 1000) && icm_gyro_x > 1000))
+
 	{
 		upr_flag = 0;
 		spe_flag = 0;
-		gyro_pid.Ki = 30;
+		gyro_pid.Ki = 40;
 		// RunFlag=0;
 	}
 	else
 	{
 		upr_flag = 1;
 		spe_flag = 1;
-		gyro_pid.Ki = 40;
+		gyro_pid.Ki = 50;
 
 		// RunFlag=1;
 	}

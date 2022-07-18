@@ -66,7 +66,7 @@
 
 #define BUZZER_OFF gpio_set(G2, 1)
 #define BUZZER_ON gpio_set(G2, 0)
-#define THRESHOLD 60
+#define THRESHOLD 100
 
 #endif
 

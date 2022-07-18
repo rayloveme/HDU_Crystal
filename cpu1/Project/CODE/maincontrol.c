@@ -30,7 +30,7 @@ uint32 turn_kp = 0, turn_speed = 0;
 uint32 beacon_x_2, beacon_y_2, beacon_area_2;
 uint8 beacon_flag_2;
 
-float jiansu_t_max=0;
+float jiansu_t_max = 0;
 uint16 angle_set = 0; //机械零点左右角度
 int16 speed_set = 0;
 uint32 angle_test = 0;
@@ -88,6 +88,7 @@ void All_Init(void)
 
     angle_set = angle_test;
     speed_set = speed_test;
+    //    speed_set_now = speed_test;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -106,60 +107,47 @@ void Main_Control(void)
     //数灯（暂未加）
     if (run_mode == 0) //双摄正常跑模式
     {
+        //        if (1) //双摄没看到
         if (beacon_flag_2 == 0) //双摄没看到
         {
+            //            if (0)
             if (beacon_flag == 1)
             {
                 cut_flag = 0;
-                if (DOWN_CONDITION) //没到减速点
-                {
-                    speed_set = speed_test;
-                    jiansu_t_max=50;
-                    LocPid_Cal_Dir(&direction, beacon_x, beacon_list[beacon_y]);
-                    turn_pwm = direction.value;
-                }
 
-                //            else if (beacon_y < cut_point) //到达减速点
+                speed_set = speed_test;
+                jiansu_t_max = 25;
 
-                else if ((beacon_y != 404) && (beacon_y < cut_point)) //到达减速点
+                LocPid_Cal_Dir(&direction, beacon_x, beacon_list[beacon_y]);
+                turn_pwm = direction.value;
+                                Down_Point_flag = 0;
 
-                {
-
-                    // LocPid_Cal(&direction, beacon_x, beacon_list[beacon_y]);
-                }
-                else //到达切灯点
-                {
-                    //                    speed_set = speed_test - 1000;
-                    direction.value = 400;
-                    //                speed_set=speed_test;
-                }
             }
             else //丢灯
             {
-
-                 //speed_set = speed_test - 300;
+                speed_set = speed_test - 400;
+                jiansu_t_max = 60;
 
                 cut_flag = 1;
-                Down_Point_flag = 0;
-                Cut_Set(0);
+
+                Cut_Set(1);
             }
         }
         else //双摄看到咯
         {
-            if (DOWN_CONDITION)
+
+            Jiansu_Judge();
+
+            cut_flag = 0;
+            if (Down_Point_flag)
             {
-                speed_set=speed_test-500;
-                                jiansu_t_max=20;
-
-                cut_flag = 0;
-
-
-                if (Down_Point_flag == 0)
-                {
-                    // speed_set = speed_test - DOWN;
-                    Down_Point_flag = 1;
-                }
-                // Jiansu_Judge();
+                speed_set = speed_test - 500;
+                jiansu_t_max = 40;
+            }
+            else
+            {
+                speed_set = speed_test;
+                jiansu_t_max = 25;
             }
 
             LocPid_Cal_Dir(&direction_2, beacon_x_2, beacon_list_2[beacon_y_2]);
@@ -282,68 +270,68 @@ void Beacon_List_2_Init(void)
     beacon_list_2[22] = 65;
     beacon_list_2[23] = 65;
     beacon_list_2[24] = 70;
-    beacon_list_2[25] = 71;
-    beacon_list_2[26] = 72;
-    beacon_list_2[27] = 73;
-    beacon_list_2[28] = 74;
-    beacon_list_2[29] = 75;
-    beacon_list_2[30] = 76;
-    beacon_list_2[31] = 77;
-    beacon_list_2[32] = 78;
-    beacon_list_2[33] = 79;
-    beacon_list_2[34] = 80;
-    beacon_list_2[35] = 82;
-    beacon_list_2[36] = 84;
-    beacon_list_2[37] = 86;
-    beacon_list_2[38] = 88;
-    beacon_list_2[39] = 88;
-    beacon_list_2[40] = 89;
-    beacon_list_2[41] = 89;
-    beacon_list_2[42] = 90;
-    beacon_list_2[43] = 91;
-    beacon_list_2[44] = 92;
-    beacon_list_2[45] = 93;
-    beacon_list_2[46] = 93;
-    beacon_list_2[47] = 93;
-    beacon_list_2[48] = 94;
-    beacon_list_2[49] = 94;
-    beacon_list_2[50] = 94;
-    beacon_list_2[51] = 95;
-    beacon_list_2[52] = 95;
-    beacon_list_2[53] = 96;
-    beacon_list_2[54] = 98;
-    beacon_list_2[55] = 100;
-    beacon_list_2[56] = 102;
-    beacon_list_2[57] = 104;
-    beacon_list_2[58] = 106;
-    beacon_list_2[59] = 108;
-    beacon_list_2[60] = 110;
-    beacon_list_2[61] = 110;
-    beacon_list_2[62] = 110;
-    beacon_list_2[63] = 110;
+    beacon_list_2[25] = 70;
+    beacon_list_2[26] = 70;
+    beacon_list_2[27] = 70;
+    beacon_list_2[28] = 70;
+    beacon_list_2[29] = 70;
+    beacon_list_2[30] = 70;
+    beacon_list_2[31] = 70;
+    beacon_list_2[32] = 70;
+    beacon_list_2[33] = 70;
+    beacon_list_2[34] = 70;
+    beacon_list_2[35] = 70;
+    beacon_list_2[36] = 70;
+    beacon_list_2[37] = 70;
+    beacon_list_2[38] = 70;
+    beacon_list_2[39] = 70;
+    beacon_list_2[40] = 70;
+    beacon_list_2[41] = 70;
+    beacon_list_2[42] = 70;
+    beacon_list_2[43] = 70;
+    beacon_list_2[44] = 70;
+    beacon_list_2[45] = 70;
+    beacon_list_2[46] = 70;
+    beacon_list_2[47] = 70;
+    beacon_list_2[48] = 70;
+    beacon_list_2[49] = 70;
+    beacon_list_2[50] = 70;
+    beacon_list_2[51] = 70;
+    beacon_list_2[52] = 70;
+    beacon_list_2[53] = 70;
+    beacon_list_2[54] = 70;
+    beacon_list_2[55] = 70;
+    beacon_list_2[56] = 70;
+    beacon_list_2[57] = 70;
+    beacon_list_2[58] = 70;
+    beacon_list_2[59] = 70;
+    beacon_list_2[60] = 70;
+    beacon_list_2[61] = 70;
+    beacon_list_2[62] = 70;
+    beacon_list_2[63] = 70;
 }
 
 void Param_Cfg(void)
 {
-    speed_cl.Kp = 150;
+    speed_cl.Kp = 130;
     speed_cl.Ki = 0;
     speed_cl.Kd = 30;
-    speed_test = 1000;
+    speed_test = 1500;
     upright.Kp = 200; // 170
     upright.Ki = 1;
     upright.Kd = 30; // 65
     angle_test = 1550;
     gyro_pid.Kp = 80;
-    gyro_pid.Ki = 40;
+    gyro_pid.Ki = 50;
     gyro_pid.Kd = 0;
-    direction.Kp = 2000;
+    direction.Kp = 4000; // 2000
     direction.Ki = 0;
-    direction.Kd = 0;
+    direction.Kd = 400;
     turn_kp = 0;
     turn_speed = 1200;
     down_point = 65;
     cut_point = 65;
-    direction_2.Kp = 4000;
+    direction_2.Kp = 4000; // 4000
     direction_2.Ki = 0;
-    direction_2.Kd = 400;
+    direction_2.Kd = 400; // 400
 }
