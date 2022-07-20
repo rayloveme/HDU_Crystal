@@ -31,7 +31,6 @@ void Image_Binarization(uint8 image[ROW][COL], uint8 image_binr[ROW][COL], uint8
         }
 }
 
-struct Domain domain[DOMAIN_NUMBER];
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      搜索连通域
 //  @param      image[ROW][COL]         二值化后的图像数组
@@ -40,91 +39,6 @@ struct Domain domain[DOMAIN_NUMBER];
 //  @return     找到1 没找到0
 //  Sample usage:       Beacon_Find_Bin(image_binr,64,128);
 //-------------------------------------------------------------------------------------------------------------------
-uint8 Domain_Find_Bin(uint8 image[ROW][COL], uint8 height, uint8 width)
-{
-
-    int16 i = 0;
-    int16 j = 0;
-    uint8 area = 0;
-    uint8 domain_count = 0;
-    uint8 left, up, right, down;
-    uint8 find_flag = 0;
-    uint8 line_area = 0;      //记录当前行面积
-    uint8 last_line_area = 0; //记录上一行面积
-
-    for (i = height - 1; i >= 0; i--)
-    {
-        line_area = 0;
-        for (j = 0; j < width; j++)
-        {
-            if (image[i][j] == 1)
-            {
-                if (find_flag == 0)
-                {
-                    find_flag = 1;
-                    left = j;
-                    down = i;
-                }
-                up = i;
-                right = j;
-                line_area++;
-                area++;
-            }
-        }
-
-        if ((last_line_area > 0 && line_area == 0) || (i == 0 && line_area != 0))
-        {
-            if (domain_count < DOMAIN_NUMBER)
-            {
-                beacon_flag = 1;
-
-                domain[domain_count].last_area = domain[domain_count].area;
-                domain[domain_count].area = area;
-                domain[domain_count].area_change_rate = domain[domain_count].area - domain[domain_count].last_area;
-                domain[domain_count].x = (left + right) >> 1;
-                domain[domain_count].y = (up + down) >> 1;
-
-                domain_count++;
-                left = 0;
-                right = 0;
-                up = 0;
-                down = 0;
-                area = 0;
-            }
-            else
-            {
-                //目前默认第一个连通域是灯
-                beacon_x = domain[0].x;
-                beacon_y = domain[0].y;
-                beacon_area = domain[0].area;
-                return 1;
-            }
-        }
-        last_line_area = line_area;
-    }
-    if (find_flag == 0)
-    {
-        //未找到连通域，则清空数据
-        beacon_x = 404;
-        beacon_y = 404;
-        beacon_area = 0;
-        return 0;
-    }
-    beacon_x = domain[0].x;
-    beacon_y = domain[0].y;
-    beacon_area = domain[0].area;
-    if (domain_count < DOMAIN_NUMBER)
-    {
-        for (uint8 n = 0; n < DOMAIN_NUMBER - domain_count; n++)
-        {
-            domain[domain_count + n].area = 0;
-            domain[domain_count + n].x = 404;
-            domain[domain_count + n].y = 404;
-        }
-    }
-    return 1;
-}
-
 uint8 Beacon_Find_Bin(uint8 image[ROW][COL])
 {
     int16 i = 0;
@@ -137,37 +51,41 @@ uint8 Beacon_Find_Bin(uint8 image[ROW][COL])
 
     uint8 row_dipingxian = ROW;
 
-    if (angle_final < 1230)
+    if (angle_final < 1420)
     {
         row_dipingxian = 64;
     }
-    else if (angle_final < 1500)
+    else if (angle_final < 1580)
     {
-        row_dipingxian = 45;
+        row_dipingxian = 47;
     }
-    else if (angle_final < 1700)
+    else if (angle_final < 1760)
+    {
+        row_dipingxian = 42;
+    }
+    else if (angle_final < 1890)
     {
         row_dipingxian = 40;
     }
-    else if (angle_final < 1850)
+    else if (angle_final < 2050)
     {
-        row_dipingxian = 35;
+        row_dipingxian = 36;
     }
-    else if (angle_final < 2150)
+    else if (angle_final < 2310)
     {
         row_dipingxian = 30;
     }
-    else if (angle_final < 2350)
+    else if (angle_final < 2450)
     {
-        row_dipingxian = 25;
+        row_dipingxian = 27;
     }
-    else if (angle_final < 2600)
+    else if (angle_final < 2620)
     {
-        row_dipingxian = 20;
+        row_dipingxian = 24;
     }
-    else if (angle_final < 2750)
+    else if (angle_final < 2920)
     {
-        row_dipingxian = 17;
+        row_dipingxian = 18;
     }
     else
     {
@@ -226,7 +144,6 @@ void Image_Get(void)
     if (mt9v03x_finish_flag)
     {
         Image_Binarization(mt9v03x_image, image_binr, 100);
-        //            Blink_Img_Fliter();
         mt9v03x_finish_flag = 0;
     }
 }

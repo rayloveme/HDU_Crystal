@@ -36,8 +36,8 @@ void All_Init(void)
     Send_Init();
     //    oled_p8x16str(0, 0, "Camera init...");
     mt9v03x_init();
-    oled_fill(0x00);
-    seekfree_wireless_init();
+//    oled_fill(0x00);
+//    seekfree_wireless_init();
     //    Buzzer_Init();
 
     //    BUZZER_ON;
@@ -62,7 +62,7 @@ void Main_Control(void)
 {
     Image_Get();
     If_Find_Beacon();
-        sendimg_WIFI(mt9v03x_image[0], 128, 64);
+//        sendimg_WIFI(mt9v03x_image[0], 128, 64);
 //    sendimg_WIFI_binary_CHK(mt9v03x_image[0], 128, 64, THRESHOLD, 5);
 //    put_int32_WIFI(0, (int32)beacon_x);
 //    put_int32_WIFI(1, (int32)beacon_y);

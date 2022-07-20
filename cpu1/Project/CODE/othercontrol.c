@@ -1,7 +1,7 @@
 /*
  * All rights reserved.
  * @file       		othercontrol.h
- * @brief              涓€浜涘埆鐨勬帶锟??
+ * @brief              涓€浜涘埆鐨勬帶�????
  * @author     		ray
  * @Target core		MM32F3277
  * @date       		2022-06-27
@@ -12,14 +12,13 @@
 
 //鍏ㄥ眬鍙橀噺鍖?
 uint8 Motor_Limit_Ratio = 4;
-float k_z = 0.1; //瑙掗€熷害璧锋姂鍒惰浆鍚戠殑浣滅敤
 
 //-------------------------------------------------------------------------------------------------------------------
-//  @brief      int闄愬箙
+//  @brief      int闄愬�??
 //  @param      duty	闄愬箙鍊?
-//  @param      min		鏈€灏忓€?
+//  @param      min		鏈€灏忓�???
 //  @param      max		鏈€澶у€?
-//  @return     duty 	闄愬箙鍚庤緭鍑?
+//  @return     duty 	闄愬箙鍚庤緭�???
 //  @note
 //  Sample usage:       Int_Range_Protect();
 //-------------------------------------------------------------------------------------------------------------------
@@ -29,7 +28,7 @@ int32 Int_Range_Protect(int32 duty, int32 min, int32 max)
 	{
 		return max;
 	}
-	if (duty <= min)
+	if (duty < min)
 	{
 		return min;
 	}
@@ -40,11 +39,11 @@ int32 Int_Range_Protect(int32 duty, int32 min, int32 max)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-//  @brief      uint闄愬箙
+//  @brief      uint闄愬�??
 //  @param      duty	闄愬箙鍊?
-//  @param      min		鏈€灏忓€?
+//  @param      min		鏈€灏忓�???
 //  @param      max		鏈€澶у€?
-//  @return     duty 	闄愬箙鍚庤緭鍑?
+//  @return     duty 	闄愬箙鍚庤緭�???
 //  @note
 //  Sample usage:       Uint_Range_Protect();
 //-------------------------------------------------------------------------------------------------------------------
@@ -54,7 +53,7 @@ uint32 Uint_Range_Protect(uint32 duty, uint32 min, uint32 max)
 	{
 		return max;
 	}
-	if (duty <= min)
+	if (duty < min)
 	{
 		return min;
 	}
@@ -66,34 +65,27 @@ uint32 Uint_Range_Protect(uint32 duty, uint32 min, uint32 max)
 
 //-------------------------------------------------------------------------------------------------------------------
 //  @brief      鐢垫満杈撳嚭鍔ㄦ€侀檺骞?
-//  @param      void
+//  @param      dir 1 right/0 left
 //  @return     void
 //  @note
 //  Sample usage:       PWM_dynamic_limit();
 //-------------------------------------------------------------------------------------------------------------------
-void PWM_dynamic_limit(void)
+void PWM_dynamic_limit(uint8 dir)
 {
+	//	if (dir)
+	//	//����RIght
+	//	{
+	//		leftpwm = Int_Range_Protect(leftpwm, -1000 * Motor_Limit_Ratio, 1000 * Motor_Limit_Ratio);
+	//		rightpwm = Int_Range_Protect(rightpwm, -1000 * Motor_Limit_Ratio, 0);
+	//	}
+	//	else
+	//	{
+	//		leftpwm = Int_Range_Protect(leftpwm, -1000 * Motor_Limit_Ratio, 0);
+	//		rightpwm = Int_Range_Protect(rightpwm, -1000 * Motor_Limit_Ratio, 1000 * Motor_Limit_Ratio);
+	//	}
+
 	leftpwm = Int_Range_Protect(leftpwm, -1000 * Motor_Limit_Ratio, 1000 * Motor_Limit_Ratio);
 	rightpwm = Int_Range_Protect(rightpwm, -1000 * Motor_Limit_Ratio, 1000 * Motor_Limit_Ratio);
-}
-
-//-------------------------------------------------------------------------------------------------------------------
-//  @brief      杞悜鍋忓樊婊戝姩婊ゆ尝
-//  @param      error	杞悜鍋忓樊
-//  @return     turn_error 婊ゆ尝鍚庡亸宸?
-//  @note
-//  Sample usage:       PWM_dynamic_limit();
-//-------------------------------------------------------------------------------------------------------------------
-int16 Turn_Error_Filter(int16 error) //杞悜鎺у埗婊戝姩杈撳嚭婊ゆ尝
-{
-	int16 turn_error;
-	static int16 pre_turn_error[4];
-	pre_turn_error[3] = pre_turn_error[2];
-	pre_turn_error[2] = pre_turn_error[1];
-	pre_turn_error[1] = pre_turn_error[0];
-	pre_turn_error[0] = error;
-	turn_error = pre_turn_error[0] * 0.4 + pre_turn_error[1] * 0.3 + pre_turn_error[2] * 0.2 + pre_turn_error[3] * 0.1;
-	return turn_error;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
@@ -126,23 +118,125 @@ void If_Find_Beacon(void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-//  @brief      鍒囩伅
-//  @param      DIR   1宸﹁浆
+//  @brief      鍒囩�??
+//  @param      DIR   1宸﹁�??
 //  @return     void
 //  Sample usage:       Cut_Set(1);
 //-------------------------------------------------------------------------------------------------------------------
-void Cut_Set(uint8 DIR)
+int16 turn_delta = 2;
+void Cut_Set(uint8 dir, uint8 mode)
 {
-	if (DIR)
-		turn_pwm = turn_speed;
+	if (mode)
+	{
+		spe_flag = 0;
+		angle_set = 2500;
+		turn_speed = 500;
+
+		if (dir)
+			turn_pwm = -turn_speed;
+		else
+			turn_pwm = turn_speed;
+	}
 	else
-		turn_pwm = -turn_speed;
+	{
+		turn_pwm += turn_delta;
+		turn_pwm = Int_Range_Protect(turn_pwm, 50, turn_speed);
+
+		if (dir)
+		{
+			turn_pwm = -turn_speed;
+		}
+		else
+		{
+			turn_pwm = turn_speed;
+		}
+	}
 }
 
 void Jiansu_Judge(void)
+{ //根据不同速度 角度 y坐标进行耦合 多尝�?
+	if (L_C + R_C > 1200)
+	{
+		if (beacon_y > 40)
+		{
+			Down_Point_flag = 1;
+			return;
+		}
+		if (beacon_y_2 > 0)
+		{
+			Down_Point_flag = 1;
+			return;
+		}
+	}
+
+	else
+	{
+		;
+	}
+}
+
+uint8 Beacon_2_Confirm(void)
 {
-	if (angle_final > (2500 - 47 * beacon_y_2))
-		Down_Point_flag = 1;
-//	else
-//		Down_Point_flag = 0;
+	if (angle_final < 930)
+	{
+		beacon_flag_2 = 0;
+		return 0;
+	}
+	else if (angle_final < 1085)
+	{
+		if (beacon_y_2 < 45)
+		{
+			beacon_flag_2 = 0;
+			return 0;
+		}
+	}
+	else if (angle_final < 1250)
+	{
+		if (beacon_y_2 < 40)
+		{
+			beacon_flag_2 = 0;
+			return 0;
+		}
+	}
+	else if (angle_final < 1460)
+	{
+		if (beacon_y_2 < 35)
+		{
+			beacon_flag_2 = 0;
+			return 0;
+		}
+	}
+	else if (angle_final < 1670)
+	{
+		if (beacon_y_2 < 30)
+		{
+			beacon_flag_2 = 0;
+			return 0;
+		}
+	}
+	else if (angle_final < 1870)
+	{
+		if (beacon_y_2 < 25)
+		{
+			beacon_flag_2 = 0;
+			return 0;
+		}
+	}
+	else if (angle_final < 2110)
+	{
+		if (beacon_y_2 < 20)
+		{
+			beacon_flag_2 = 0;
+			return 0;
+		}
+	}
+	else
+		return 1;
+	return 0;
+}
+
+void Speed_Control(uint16 speed, uint8 time)
+{
+	speed_set = speed;
+	jiansu_t_max = time;
 }

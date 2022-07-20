@@ -24,7 +24,7 @@ void Flash_Write(void)
     flash_buffer[0] =direction.Kp;
     flash_buffer[1] =direction.Ki;
     flash_buffer[2] =direction.Kd;
-    flash_buffer[3] =down_point;
+    flash_buffer[3] =run_mode;
     flash_buffer[4] =cut_point;
     flash_buffer[5] =angle_test;
     flash_buffer[6] =upright.Kp;
@@ -88,7 +88,7 @@ void Flash_Read(void)
         direction.Kp=flash_buffer[0];
         direction.Ki=flash_buffer[1];
         direction.Kd=flash_buffer[2];
-        down_point  =flash_buffer[3];
+        run_mode  =flash_buffer[3];
         cut_point   =flash_buffer[4];
         angle_test  =flash_buffer[5];
         upright.Kp  =flash_buffer[6];

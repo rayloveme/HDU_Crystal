@@ -2116,9 +2116,6 @@
             <name>$PROJ_DIR$\..\..\CODE\imu.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\CODE\imufilter_useless.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\..\CODE\maincontrol.c</name>
         </file>
         <file>
@@ -2135,12 +2132,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\CODE\motor.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\mymath.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\..\CODE\mymath.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\CODE\othercontrol.c</name>

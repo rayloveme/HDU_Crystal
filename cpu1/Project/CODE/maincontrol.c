@@ -1,7 +1,7 @@
 /*
  * All rights reserved.
  * @file       		maincontrol.c
- * @brief               Ö÷¿ØÖÆ³ÌĞò
+ * @brief               ä¸»æ§åˆ¶ç¨‹ï¿½?
  * @author     		ray
  * @Target core		MM32F3277
  * @date       		2022-07-10
@@ -10,38 +10,34 @@
 
 #include "headfile.h"
 
-//È«¾Ö±äÁ¿Çø
-
-uint8 frame = 5;
+//å›¾åƒï¿½?
+uint8 frame = 10;
 uint8 beacon_check_frame = 0;
-uint8 beacon_flag = 0;
-uint8 run_mode = 0;
-// uint8  PID_flag=0;  //pidÊ¹ÄÜ±êÖ¾Î» Ä¿Ç°ÎŞ±ØÒª
-uint8 Down_Point_flag = 0;
-uint8 pid_flag = 1;
-uint32 down_point, cut_point;
+uint8 beacon_flag = 0, beacon_flag_2 = 0;
 uint8 beacon_list[405] = {0};
 uint8 beacon_list_2[405] = {0};
-uint32 beacon_x = 0, beacon_y = 0;
+uint32 beacon_x = 0, beacon_y = 0, beacon_area = 0;
 uint32 last_beacon_x = 0, last_beacon_y = 0;
-uint32 beacon_area = 0, beacon_area_last = 0;
-uint32 turn_kp = 0, turn_speed = 0;
-
 uint32 beacon_x_2, beacon_y_2, beacon_area_2;
-uint8 beacon_flag_2;
 
-float jiansu_t_max = 0;
-uint16 angle_set = 0; //»úĞµÁãµã×óÓÒ½Ç¶È
+//åº•å±‚ï¿½?
+uint16 angle_set = 0; //æœºæ¢°é›¶ç‚¹å·¦å³è§’åº¦
 int16 speed_set = 0;
 uint32 angle_test = 0;
 uint32 speed_test = 0;
 int16 leftpwm = 0;
 int16 rightpwm = 0;
-int16 turn_pwm;
+
+//æ§åˆ¶ï¿½?
 uint8 cut_flag;
+uint32 run_mode = 0;
+uint32 cut_point;
+int16 turn_pwm;
+uint32 turn_kp = 0, turn_speed = 0;
+uint32 jiansu_t_max = 0; //åŠ å‡é€Ÿå¹³æ»‘æ—¶ï¿½?
 
 //-------------------------------------------------------------------------------------------------------------------
-//  @brief      ËùÓĞ³õÊ¼»¯
+//  @brief      æ‰€æœ‰åˆå§‹åŒ–
 //  @param      void
 //  @return     void
 //  @note
@@ -50,14 +46,14 @@ uint8 cut_flag;
 void All_Init(void)
 {
 
-    board_init(false); // ³õÊ¼»¯ debugÊä³ö´®¿Ú
+    board_init(false); // åˆå§‹ï¿½? debugè¾“å‡ºä¸²å£
     oled_init();
 
     Key_Init();
     Motor_Init();
     Encoder_Init();
     Beacon_List_Init();
-    Beacon_List_2_Init();
+    Beacon_List_2_Init(DIR);
     Wireless_Init();
     Send_Init();
 
@@ -79,82 +75,143 @@ void All_Init(void)
     oled_fill(0x00);
     Menu_Init();
 
-    // gpio_init(B0,GPO,1,GPO_PUSH_PULL);
+    speed_set = speed_test;
 
-    tim_interrupt_init_ms(TIM_8, 1, 0); //½ÇËÙ¶È»·ÖĞ¶Ï
-    tim_interrupt_init_ms(TIM_6, 5, 1); //½Ç¶È»· ÄÚÇ¶ËÙ¶È»·20ms
+    speed_set_now = speed_test; // tmdä¸çŸ¥é“ä»€ä¹ˆæ—¶å€™ä¼šç”¨åˆ°
 
-    //    tim_interrupt_init_ms(TIM_7, 20, 2); //²ÎÊı·¢ËÍÖĞ¶Ï
+    tim_interrupt_init_ms(TIM_8, 1, 0);  //è§’é€Ÿåº¦ç¯ä¸­ï¿½?
+    tim_interrupt_init_ms(TIM_7, 20, 2); //é€Ÿåº¦ï¿½?
+    tim_interrupt_init_ms(TIM_6, 5, 1);  //è§’åº¦ï¿½?
 
     angle_set = angle_test;
-    speed_set = speed_test;
-    //    speed_set_now = speed_test;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-//  @brief      Ö÷¿ØÖÆ
+//  @brief      ä¸»æ§ï¿½?
 //  @param      void
 //  @return     void
 //  @note
 //  Sample usage:       Main_Control();
 //-------------------------------------------------------------------------------------------------------------------
-#define DOWN_CONDITION 1 //¼õËÙÌõ¼ş
-#define DOWN 0           //¼õËÙÖµ
+uint8 ENVENT;
+#define ALL_NO 0
+#define UP_ONLY 1
+#define DOWM_ONLY 2
+#define ALL_OK 3
+
+uint8 Down_Point_flag;
+#define NO_DOWN 0 //ç¨³å®šspeedset
+#define DOWN_1 1  // 1æ¡£ä½å‡ï¿½? åç»­åŒç†
+#define DOWN_2 2
+#define DOWN_3 3
+#define DOWN_4 4
+#define UP_1 5 // 1æ¡£ä½åŠ ï¿½? åç»­åŒç†
+#define UP_2 6
+#define UP_3 7
+#define UP_4 8
+
+#define TURN_MODE_0 0
+#define TURN_MODE_1 1
 void Main_Control(void)
 {
     Image_Get();
     If_Find_Beacon();
-    //ÊıµÆ£¨ÔİÎ´¼Ó£©
-    if (run_mode == 0) //Ë«ÉãÕı³£ÅÜÄ£Ê½
+
+    //æ•°ç¯ï¼ˆæš‚æœªåŠ ï¿½?
+
+    ENVENT = beacon_flag_2 + beacon_flag_2 + beacon_flag;
+
+    if (run_mode == 0) //åŒæ‘„æ­£å¸¸è·‘æ¨¡ï¿½?
     {
-        //        if (1) //Ë«ÉãÃ»¿´µ½
-        if (beacon_flag_2 == 0) //Ë«ÉãÃ»¿´µ½
+        switch (ENVENT)
+        // switch (ALL_NO)
         {
-            //            if (0)
-            if (beacon_flag == 1)
-            {
-                cut_flag = 0;
+        case ALL_NO: //éƒ½æ²¡çœ‹åˆ°
+            if (cut_flag == 0)
+                turn_pwm = 0;
+            cut_flag = 1;
+            // Speed_Control(1000, 60);
+            Cut_Set(DIR, TURN_MODE_0);
+            Down_Point_flag = 0;
+            break;
 
-                speed_set = speed_test;
-                jiansu_t_max = 25;
-
-                LocPid_Cal_Dir(&direction, beacon_x, beacon_list[beacon_y]);
-                turn_pwm = direction.value;
-                                Down_Point_flag = 0;
-
-            }
-            else //¶ªµÆ
-            {
-                speed_set = speed_test - 400;
-                jiansu_t_max = 60;
-
-                cut_flag = 1;
-
-                Cut_Set(1);
-            }
-        }
-        else //Ë«Éã¿´µ½¿©
-        {
-
+        case UP_ONLY: //ä¸Šæ‘„çœ‹åˆ°
+            angle_set = angle_test;
             Jiansu_Judge();
+            switch (Down_Point_flag)
+            {
+            case NO_DOWN:
+                Speed_Control(speed_test, 30);
+                break;
+            case DOWN_1:
+                Speed_Control(speed_test - 600, 100);
+                break;
+            }
+            cut_flag = 0;
+
+            // Speed_Control(speed_test, 30);
+
+            LocPid_Cal_Dir(&direction, beacon_x, beacon_list[beacon_y]);
+            turn_pwm = direction.value;
+            break;
+
+        case ALL_OK: //éƒ½çœ‹ï¿½?
+            angle_set = angle_test;
 
             cut_flag = 0;
-            if (Down_Point_flag)
+
+            if (1)
+            //                            if (Beacon_2_Confirm())
             {
-                speed_set = speed_test - 500;
-                jiansu_t_max = 40;
+                Jiansu_Judge();
+
+                switch (Down_Point_flag)
+                {
+                case NO_DOWN:
+                    Speed_Control(speed_test, 30);
+                    break;
+                case DOWN_1:
+                    Speed_Control(speed_test - 600, 100);
+                    break;
+                }
+
+                LocPid_Cal_Dir(&direction_2, beacon_x_2, beacon_list_2[beacon_y_2]);
+                turn_pwm = direction_2.value;
             }
             else
             {
-                speed_set = speed_test;
-                jiansu_t_max = 25;
+                Speed_Control(speed_test, 15);
+
+                LocPid_Cal_Dir(&direction, beacon_x, beacon_list[beacon_y]);
+                turn_pwm = direction.value;
+                Down_Point_flag = 0;
             }
 
+            break;
+
+        case DOWM_ONLY: //ä¸‹æ‘„çœ‹åˆ°
+            angle_set = angle_test;
+
+            Jiansu_Judge();
+            cut_flag = 0;
+            switch (Down_Point_flag)
+            {
+            case NO_DOWN:
+                Speed_Control(speed_test, 30);
+                break;
+            case DOWN_1:
+                Speed_Control(speed_test - 600, 100);
+                break;
+            }
             LocPid_Cal_Dir(&direction_2, beacon_x_2, beacon_list_2[beacon_y_2]);
             turn_pwm = direction_2.value;
+            break;
+
+        default:
+            break;
         }
     }
-    else if (run_mode == 1)
+    else if (run_mode == 1) //å†³èµ›å¯èƒ½ä½¿ç”¨ æå‰åšå¥½å‡†å¤‡
         ;
     else if (run_mode == 2)
         ;
@@ -163,7 +220,7 @@ void Main_Control(void)
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-//  @brief      ³õÊ¼»¯¹ì¼£Êı×é
+//  @brief      åˆå§‹åŒ–è½¨è¿¹æ•°ï¿½?
 //  @param      void
 //  @return     void
 //  Sample usage:       Beacon_List_Init();
@@ -210,105 +267,175 @@ void Beacon_List_Init(void)
     beacon_list[37] = 64;
     beacon_list[38] = 64;
     beacon_list[39] = 64;
-    beacon_list[40] = 64;
-    beacon_list[41] = 64;
-    beacon_list[42] = 64;
-    beacon_list[43] = 64;
-    beacon_list[44] = 64;
-    beacon_list[45] = 64;
-    beacon_list[46] = 64;
-    beacon_list[47] = 64;
-    beacon_list[48] = 64;
-    beacon_list[49] = 64;
-    beacon_list[50] = 64;
-    beacon_list[51] = 64;
-    beacon_list[52] = 64;
-    beacon_list[53] = 64;
-    beacon_list[54] = 64;
-    beacon_list[55] = 64;
-    beacon_list[56] = 64;
-    beacon_list[57] = 64;
-    beacon_list[58] = 64;
-    beacon_list[59] = 64;
-    beacon_list[60] = 64;
-    beacon_list[61] = 64;
-    beacon_list[62] = 64;
-    beacon_list[63] = 64;
+    beacon_list[40] = 54;
+    beacon_list[41] = 54;
+    beacon_list[42] = 54;
+    beacon_list[43] = 54;
+    beacon_list[44] = 54;
+    beacon_list[45] = 54;
+    beacon_list[46] = 54;
+    beacon_list[47] = 54;
+    beacon_list[48] = 54;
+    beacon_list[49] = 54;
+    beacon_list[50] = 54;
+    beacon_list[51] = 54;
+    beacon_list[52] = 54;
+    beacon_list[53] = 54;
+    beacon_list[54] = 54;
+    beacon_list[55] = 54;
+    beacon_list[56] = 54;
+    beacon_list[57] = 54;
+    beacon_list[58] = 54;
+    beacon_list[59] = 54;
+    beacon_list[60] = 54;
+    beacon_list[61] = 54;
+    beacon_list[62] = 54;
+    beacon_list[63] = 54;
 }
 
 //-------------------------------------------------------------------------------------------------------------------
-//  @brief      ³õÊ¼»¯¹ì¼£2Êı×é
-//  @param      void
+//  @brief      åˆå§‹åŒ–è½¨ï¿½?2æ•°ç»„
+//  @param      dir 1 right \ 0 left
 //  @return     void
 //  Sample usage:       Beacon_List_2_Init();
 //-------------------------------------------------------------------------------------------------------------------
-void Beacon_List_2_Init(void)
+void Beacon_List_2_Init(uint8 dir)
 {
-    //
-    beacon_list_2[0] = 65;
-    beacon_list_2[1] = 65;
-    beacon_list_2[2] = 65;
-    beacon_list_2[3] = 65;
-    beacon_list_2[4] = 65;
-    beacon_list_2[5] = 65;
-    beacon_list_2[6] = 65;
-    beacon_list_2[7] = 65;
-    beacon_list_2[8] = 65;
-    beacon_list_2[9] = 65;
-    beacon_list_2[10] = 65;
-    beacon_list_2[11] = 65;
-    beacon_list_2[12] = 65;
-    beacon_list_2[13] = 65;
-    beacon_list_2[14] = 65;
-    beacon_list_2[15] = 65;
-    beacon_list_2[16] = 65;
-    beacon_list_2[17] = 65;
-    beacon_list_2[18] = 65;
-    beacon_list_2[19] = 65;
-    beacon_list_2[20] = 65;
-    beacon_list_2[21] = 65;
-    beacon_list_2[22] = 65;
-    beacon_list_2[23] = 65;
-    beacon_list_2[24] = 70;
-    beacon_list_2[25] = 70;
-    beacon_list_2[26] = 70;
-    beacon_list_2[27] = 70;
-    beacon_list_2[28] = 70;
-    beacon_list_2[29] = 70;
-    beacon_list_2[30] = 70;
-    beacon_list_2[31] = 70;
-    beacon_list_2[32] = 70;
-    beacon_list_2[33] = 70;
-    beacon_list_2[34] = 70;
-    beacon_list_2[35] = 70;
-    beacon_list_2[36] = 70;
-    beacon_list_2[37] = 70;
-    beacon_list_2[38] = 70;
-    beacon_list_2[39] = 70;
-    beacon_list_2[40] = 70;
-    beacon_list_2[41] = 70;
-    beacon_list_2[42] = 70;
-    beacon_list_2[43] = 70;
-    beacon_list_2[44] = 70;
-    beacon_list_2[45] = 70;
-    beacon_list_2[46] = 70;
-    beacon_list_2[47] = 70;
-    beacon_list_2[48] = 70;
-    beacon_list_2[49] = 70;
-    beacon_list_2[50] = 70;
-    beacon_list_2[51] = 70;
-    beacon_list_2[52] = 70;
-    beacon_list_2[53] = 70;
-    beacon_list_2[54] = 70;
-    beacon_list_2[55] = 70;
-    beacon_list_2[56] = 70;
-    beacon_list_2[57] = 70;
-    beacon_list_2[58] = 70;
-    beacon_list_2[59] = 70;
-    beacon_list_2[60] = 70;
-    beacon_list_2[61] = 70;
-    beacon_list_2[62] = 70;
-    beacon_list_2[63] = 70;
+    if (dir)
+    {
+        //å³åˆ‡
+        beacon_list_2[0] = 65;
+        beacon_list_2[1] = 65;
+        beacon_list_2[2] = 65;
+        beacon_list_2[3] = 65;
+        beacon_list_2[4] = 65;
+        beacon_list_2[5] = 65;
+        beacon_list_2[6] = 65;
+        beacon_list_2[7] = 65;
+        beacon_list_2[8] = 65;
+        beacon_list_2[9] = 65;
+        beacon_list_2[10] = 65;
+        beacon_list_2[11] = 65;
+        beacon_list_2[12] = 65;
+        beacon_list_2[13] = 65;
+        beacon_list_2[14] = 65;
+        beacon_list_2[15] = 65;
+        beacon_list_2[16] = 65;
+        beacon_list_2[17] = 65;
+        beacon_list_2[18] = 65;
+        beacon_list_2[19] = 65;
+        beacon_list_2[20] = 65;
+        beacon_list_2[21] = 65;
+        beacon_list_2[22] = 65;
+        beacon_list_2[23] = 65;
+        beacon_list_2[24] = 75;
+        beacon_list_2[25] = 75;
+        beacon_list_2[26] = 75;
+        beacon_list_2[27] = 75;
+        beacon_list_2[28] = 75;
+        beacon_list_2[29] = 75;
+        beacon_list_2[30] = 75;
+        beacon_list_2[31] = 75;
+        beacon_list_2[32] = 75;
+        beacon_list_2[33] = 75;
+        beacon_list_2[34] = 75;
+        beacon_list_2[35] = 75;
+        beacon_list_2[36] = 75;
+        beacon_list_2[37] = 75;
+        beacon_list_2[38] = 75;
+        beacon_list_2[39] = 75;
+        beacon_list_2[40] = 75;
+        beacon_list_2[41] = 75;
+        beacon_list_2[42] = 75;
+        beacon_list_2[43] = 75;
+        beacon_list_2[44] = 75;
+        beacon_list_2[45] = 75;
+        beacon_list_2[46] = 75;
+        beacon_list_2[47] = 75;
+        beacon_list_2[48] = 75;
+        beacon_list_2[49] = 75;
+        beacon_list_2[50] = 75;
+        beacon_list_2[51] = 75;
+        beacon_list_2[52] = 75;
+        beacon_list_2[53] = 75;
+        beacon_list_2[54] = 75;
+        beacon_list_2[55] = 75;
+        beacon_list_2[56] = 75;
+        beacon_list_2[57] = 75;
+        beacon_list_2[58] = 75;
+        beacon_list_2[59] = 75;
+        beacon_list_2[60] = 75;
+        beacon_list_2[61] = 75;
+        beacon_list_2[62] = 75;
+        beacon_list_2[63] = 75;
+    }
+    else
+    { //å·¦åˆ‡
+        beacon_list_2[0] = 53;
+        beacon_list_2[1] = 53;
+        beacon_list_2[2] = 53;
+        beacon_list_2[3] = 53;
+        beacon_list_2[4] = 53;
+        beacon_list_2[5] = 53;
+        beacon_list_2[6] = 53;
+        beacon_list_2[7] = 53;
+        beacon_list_2[8] = 53;
+        beacon_list_2[9] = 53;
+        beacon_list_2[10] = 50;
+        beacon_list_2[11] = 50;
+        beacon_list_2[12] = 50;
+        beacon_list_2[13] = 50;
+        beacon_list_2[14] = 50;
+        beacon_list_2[15] = 50;
+        beacon_list_2[16] = 50;
+        beacon_list_2[17] = 50;
+        beacon_list_2[18] = 50;
+        beacon_list_2[19] = 50;
+        beacon_list_2[20] = 50;
+        beacon_list_2[21] = 50;
+        beacon_list_2[22] = 50;
+        beacon_list_2[23] = 50;
+        beacon_list_2[24] = 45;
+        beacon_list_2[25] = 45;
+        beacon_list_2[26] = 45;
+        beacon_list_2[27] = 45;
+        beacon_list_2[28] = 45;
+        beacon_list_2[29] = 45;
+        beacon_list_2[30] = 45;
+        beacon_list_2[31] = 45;
+        beacon_list_2[32] = 45;
+        beacon_list_2[33] = 40;
+        beacon_list_2[34] = 40;
+        beacon_list_2[35] = 40;
+        beacon_list_2[36] = 40;
+        beacon_list_2[37] = 40;
+        beacon_list_2[38] = 40;
+        beacon_list_2[39] = 40;
+        beacon_list_2[40] = 40;
+        beacon_list_2[41] = 40;
+        beacon_list_2[42] = 40;
+        beacon_list_2[43] = 34;
+        beacon_list_2[44] = 34;
+        beacon_list_2[45] = 34;
+        beacon_list_2[46] = 34;
+        beacon_list_2[47] = 34;
+        beacon_list_2[48] = 34;
+        beacon_list_2[49] = 34;
+        beacon_list_2[50] = 34;
+        beacon_list_2[51] = 34;
+        beacon_list_2[52] = 33;
+        beacon_list_2[53] = 33;
+        beacon_list_2[54] = 33;
+        beacon_list_2[55] = 33;
+        beacon_list_2[56] = 33;
+        beacon_list_2[57] = 33;
+        beacon_list_2[58] = 33;
+        beacon_list_2[59] = 33;
+        beacon_list_2[60] = 33;
+        beacon_list_2[61] = 33;
+        beacon_list_2[62] = 33;
+        beacon_list_2[63] = 33;
+    }
 }
 
 void Param_Cfg(void)
@@ -316,8 +443,8 @@ void Param_Cfg(void)
     speed_cl.Kp = 130;
     speed_cl.Ki = 0;
     speed_cl.Kd = 30;
-    speed_test = 1500;
-    upright.Kp = 200; // 170
+    speed_test = 1600;
+    upright.Kp = 230; // 170
     upright.Ki = 1;
     upright.Kd = 30; // 65
     angle_test = 1550;
@@ -328,8 +455,8 @@ void Param_Cfg(void)
     direction.Ki = 0;
     direction.Kd = 400;
     turn_kp = 0;
-    turn_speed = 1200;
-    down_point = 65;
+    turn_speed = 1000;
+    run_mode = 0;
     cut_point = 65;
     direction_2.Kp = 4000; // 4000
     direction_2.Ki = 0;

@@ -200,10 +200,14 @@ void Show_Control(void)
         oled_int16(46, 7, direction_2.value);
 
         oled_int16(90, 1, icm_gyro_z);
+        oled_int16(90,2, icm_gyro_y);
+        oled_int16(90, 3, icm_gyro_x);
 
-        oled_int16(90, 3, angle_final);
-        oled_int16(90, 4, beacon_x);
-        oled_int16(90, 5, beacon_y);
+
+        oled_int16(90, 4, angle_final);
+        oled_int16(90, 5, beacon_x);
+        oled_int16(90, 6, beacon_y);
+        oled_int16(90, 6, beacon_flag_2);
 
 
 
@@ -237,7 +241,7 @@ void Menu_Init(void)
     Menu_Item_Init(&PID_menu[13], &PID_menu[12], &PID_menu[14], "Dir_Kd", &direction.Kd);
     Menu_Item_Init(&PID_menu[14], &PID_menu[13], &PID_menu[15], "turn_Kp", &turn_kp);
     Menu_Item_Init(&PID_menu[15], &PID_menu[14], &PID_menu[16], "turn_speed", &turn_speed);
-    Menu_Item_Init(&PID_menu[16], &PID_menu[15], &PID_menu[17], "down_point", &down_point);
+    Menu_Item_Init(&PID_menu[16], &PID_menu[15], &PID_menu[17], "run_mode", &run_mode);
     Menu_Item_Init(&PID_menu[17], &PID_menu[16], &PID_menu[18], "cut_point", &cut_point);
     Menu_Item_Init(&PID_menu[18], &PID_menu[17], &PID_menu[19], "Dir2_Kp", &direction_2.Kp);
     Menu_Item_Init(&PID_menu[19], &PID_menu[18], &PID_menu[20], "Dir2_Ki", &direction_2.Ki);

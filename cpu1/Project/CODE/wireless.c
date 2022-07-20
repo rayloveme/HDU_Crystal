@@ -34,8 +34,7 @@ void Wireless_Init(void)
 void Wireless_Send_Pra(void)
 {
     uint8 data_buff[30] = {0};
-    uint8 buff0[4], buff1[4], buff2[2], buff3[2], buff4[2], buff5[2], buff6[2];
-    uint16 flag = beacon_flag_2;
+    uint8 buff0[4], buff1[4], buff2[2], buff3[2], buff4[2], buff5[2], buff6[2],buff7[1];
 
     int16 spe = L_C+R_C;
     int16 speL = L_C;
@@ -48,19 +47,22 @@ void Wireless_Send_Pra(void)
     L_C,R_C,beacon_x,beacon_y,speed_set_now,beacon_x_2,beacon_y_2
     */
 
-    memcpy(buff0, &beacon_x_2, 4);
+    memcpy(buff0, &beacon_y, 4);
     memcpy(buff1, &beacon_y_2, 4);
+
     memcpy(buff2, &spe_now, 2);
     memcpy(buff3, &speed_set, 2);
     memcpy(buff4, &spe, 2);
     memcpy(buff5, &angle_final, 2);
     memcpy(buff6, &icm_gyro_y, 2); //往下降低 往上增加
+    memcpy(buff7, &ENVENT, 1);
+
 
     uint8 _cnt = 0;
     data_buff[_cnt++] = 0xAA;
     data_buff[_cnt++] = 0xFF;
     data_buff[_cnt++] = 0xF1;
-    data_buff[_cnt++] = 18; //发送给上位机的字节数 uint8
+    data_buff[_cnt++] = 19; //发送给上位机的字节数 uint8
     data_buff[_cnt++] = buff0[0];
     data_buff[_cnt++] = buff0[1];
     data_buff[_cnt++] = buff0[2];
@@ -79,6 +81,8 @@ void Wireless_Send_Pra(void)
     data_buff[_cnt++] = buff5[1];
     data_buff[_cnt++] = buff6[0];
     data_buff[_cnt++] = buff6[1];
+        data_buff[_cnt++] = buff7[0];
+
     uint8 sumcheck = 0; //校验位
     uint8 addcheck = 0; //校验位
 

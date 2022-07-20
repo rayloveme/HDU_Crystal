@@ -70,5 +70,7 @@
 #include "mymath.h"
 #include "othercontrol.h"
 #include "serial.h"
+
+#define DIR 0
 #endif
 
